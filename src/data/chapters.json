@@ -1,0 +1,33 @@
+{
+  "chapters": [
+    {
+      "id": "chapter_1",
+      "title": "Chapitre 1",
+      "subtitle": "Premier Jour",
+      "startScene": "scene_1",
+      "description": "C'est votre premier jour à l'Université Starlight...",
+      "unlocked": true,
+      "thumbnail": "/assets/backgrounds/classroom.png"
+    },
+    {
+      "id": "chapter_2",
+      "title": "Chapitre 2",
+      "subtitle": "Nouvelles Amitiés",
+      "startScene": "scene_cafe",
+      "description": "Vous commencez à mieux connaître vos camarades...",
+      "unlocked": false,
+      "requiredRelation": { "Mia": 20 },
+      "thumbnail": "/assets/backgrounds/cafe.png"
+    },
+    {
+      "id": "chapter_3",
+      "title": "Chapitre 3",
+      "subtitle": "À Venir",
+      "startScene": "scene_1",
+      "description": "Bientôt disponible dans une mise à jour...",
+      "unlocked": false,
+      "thumbnail": "/assets/backgrounds/park.png"
+    }
+  ]
+}
+

@@ -1,0 +1,43 @@
+{
+  "Mia": {
+    "name": "Mia",
+    "images": {
+      "neutral": "/assets/characters/female-normal.png",
+      "happy": "/assets/characters/female-smile.png",
+      "sad": "/assets/characters/female-sad.png",
+      "angry": "/assets/characters/female-angry.png",
+      "surprised": "/assets/characters/female-shocked.png",
+      "love": "/assets/characters/female-delighted.png",
+      "laugh": "/assets/characters/female-laugh.png",
+      "annoyed": "/assets/characters/female-annoyed.png",
+      "sleepy": "/assets/characters/female-sleepy.png",
+      "smug": "/assets/characters/female-smug.png"
+    }
+  },
+  "Alex": {
+    "name": "Alex",
+    "images": {
+      "neutral": "/assets/characters/male-normal.png",
+      "happy": "/assets/characters/male-smile1.png",
+      "sad": "/assets/characters/male-sad.png",
+      "angry": "/assets/characters/male-angry1.png",
+      "surprised": "/assets/characters/male-surprised.png",
+      "love": "/assets/characters/male-smile3.png",
+      "laugh": "/assets/characters/male-laugh.png",
+      "smirk": "/assets/characters/male-smirk.png"
+    }
+  },
+  "Julien": {
+    "name": "Julien",
+    "images": {
+      "neutral": "/assets/characters/male-normal.png",
+      "happy": "/assets/characters/male-smile2.png",
+      "sad": "/assets/characters/male-sad.png",
+      "angry": "/assets/characters/male-angry2.png",
+      "surprised": "/assets/characters/male-surprised.png",
+      "love": "/assets/characters/male-smile3.png",
+      "laugh": "/assets/characters/male-laugh.png",
+      "smirk": "/assets/characters/male-smirk.png"
+    }
+  }
+}

@@ -1,0 +1,794 @@
+{
+  "start": "scene_1_annonce",
+  "scenes": {
+    "scene_1_annonce": {
+      "background": "classroom",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Quelques jours ont passé depuis votre arrivée. La routine de l'université commence à s'installer, faite de cours magistraux et de couloirs bondés."
+        },
+        {
+          "speaker": "Professeur",
+          "text": "...et c'est ainsi que l'art baroque a cédé la place au classicisme. Assurez-vous d'avoir bien relu le chapitre quatre pour la semaine prochaine."
+        },
+        {
+          "speaker": "Professeur",
+          "text": "Une dernière chose. Votre première évaluation ne sera pas un examen sur table."
+        },
+        {
+          "speaker": "Professeur",
+          "text": "Vous réaliserez, en groupe de deux ou trois, un projet de recherche sur le thème de 'l'art à travers les âges'. Le sujet précis est libre, mais j'attends de vous une analyse rigoureuse et une présentation originale."
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Un travail de groupe... déjà ? Mais je ne connais presque personne ici..."
+        },
+        {
+          "speaker": "Professeur",
+          "text": "Vous avez jusqu'à la fin de la journée pour former vos équipes et me soumettre les noms. Ne tardez pas."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "La cloche sonne, libérant les étudiants. Mais pour vous, elle sonne le début d'une course contre la montre. Un sentiment d'anxiété vous étreint. Avec qui pourriez-vous bien faire équipe ?"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer",
+          "next": "scene_2_carrefour"
+        }
+      ]
+    },
+    "scene_2_carrefour": {
+      "background": "hallway",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Le couloir est un chaos organisé. Tout le monde discute, cherche un partenaire. Votre regard balaie la foule, à la recherche d'un visage familier."
+        },
+        {
+          "speaker": "Mia",
+          "text": "Un projet ! Super ! J'ai déjà au moins dix idées, il faut juste choisir la meilleure ! Ça va être génial !",
+          "position": "left",
+          "expression": "happy"
+        },
+        {
+          "speaker": "Alex",
+          "text": "Oh non... un travail de groupe. Pourquoi ? C'est la catastrophe assurée. Je vais encore finir par tout faire tout seul à 3h du matin...",
+          "position": "right",
+          "expression": "sad"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Et là, un peu à l'écart, Julien. Calme, concentré. Il ne semble pas du tout paniqué. Au contraire, on dirait qu'il a déjà un plan."
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] D'accord... Trois visages, trois ambiances. L'enthousiasme de Mia, le chaos créatif d'Alex, ou le sérieux de Julien. C'est le moment de choisir."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Proposer à Mia de faire équipe.",
+          "next": "scene_3a_mia",
+          "effects": { "Mia": 5 }
+        },
+        {
+          "text": "Aller voir Alex, qui a l'air d'avoir besoin d'aide.",
+          "next": "scene_3b_alex",
+          "effects": { "Alex": 5 }
+        },
+        {
+          "text": "Aborder Julien, qui semble déjà organisé.",
+          "next": "scene_3c_julien",
+          "effects": { "Julien": 5 }
+        }
+      ]
+    },
+    "scene_3a_mia": {
+      "background": "library",
+      "dialogues": [
+        {
+          "speaker": "Player",
+          "text": "Salut Mia ! J'ai entendu que tu avais plein d'idées. Ça te dirait de faire équipe ensemble ?"
+        },
+        {
+          "speaker": "Mia",
+          "text": "{playerName} ! Génial ! J'allais justement te le proposer. Avec ton regard neuf et mes idées folles, on va cartonner ! Viens, on va à la bibliothèque !",
+          "position": "left",
+          "expression": "love"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Vous êtes maintenant assis face à face dans la bibliothèque, une pile de livres entre vous."
+        },
+        {
+          "speaker": "Mia",
+          "text": "Alors, écoute ça : et si on faisait une vidéo TikTok qui retrace l'histoire de la mode, inspirée par les grands courants artistiques ? Pop-Art, Surréalisme... On pourrait même se déguiser !",
+          "position": "left",
+          "expression": "happy"
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] C'est... très original. Peut-être un peu trop ? Le prof a l'air si traditionnel."
+        }
+      ],
+      "choices": [
+        {
+          "text": "C'est une super idée, très créative ! J'adore !",
+          "next": "scene_3a_mia_enthousiaste",
+          "effects": { "Mia": 10 }
+        },
+        {
+          "text": "Hmm, c'est peut-être un peu ambitieux pour une première note...",
+          "next": "scene_3a_mia_pragmatique",
+          "effects": { "Mia": -5 }
+        }
+      ]
+    },
+    "scene_3a_mia_enthousiaste": {
+      "background": "library",
+      "dialogues": [
+        {
+          "speaker": "Mia",
+          "text": "N'est-ce pas ? On va tellement s'amuser ! On pourrait commencer par le look Art Déco !",
+          "position": "left",
+          "expression": "love"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Votre session de travail se transforme en un joyeux brainstorming. Vous riez beaucoup, et malgré l'apparente folie de l'idée, vous posez les bases d'un projet solide et unique."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer",
+          "next": "scene_4_reflexion_mia"
+        }
+      ]
+    },
+    "scene_3a_mia_pragmatique": {
+      "background": "library",
+      "dialogues": [
+        {
+          "speaker": "Mia",
+          "text": "Ambitieux ? Mais c'est ça qui est bien ! Il faut voir grand ! ... Mais tu as peut-être raison. Le prof a l'air sévère.",
+          "position": "left",
+          "expression": "sad"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Vous discutez et trouvez un compromis : une présentation numérique interactive, moins 'folle' qu'une vidéo mais tout aussi originale. Mia apprécie votre pragmatisme, même si elle est un peu déçue."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer",
+          "next": "scene_4_reflexion_mia",
+          "effects": { "Mia": 5 }
+        }
+      ]
+    },
+    "scene_3b_alex": {
+      "background": "cafe",
+      "dialogues": [
+        {
+          "speaker": "Player",
+          "text": "Alex, ça va ? Tu n'as pas l'air très motivé par ce projet."
+        },
+        {
+          "speaker": "Alex",
+          "text": "{playerName} ? Ah... non, c'est pas mon truc, les groupes. Je préfère travailler seul dans mon coin, même si ça veut dire paniquer la veille de la date limite.",
+          "position": "left",
+          "expression": "sad"
+        },
+        {
+          "speaker": "Player",
+          "text": "Et si on essayait à deux ? On pourrait peut-être s'organiser... ou au moins paniquer ensemble ?"
+        },
+        {
+          "speaker": "Alex",
+          "text": "Paniquer ensemble... J'aime bien cette vision. D'accord, tu me sauves la vie. Viens, on va au café, impossible de réfléchir sans caféine.",
+          "position": "left",
+          "expression": "happy"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Vous êtes maintenant dans des fauteuils confortables, des tasses de café fumantes devant vous."
+        },
+        {
+          "speaker": "Alex",
+          "text": "OK. J'ai une idée. Probablement une mauvaise idée, mais une idée quand même. Et si on créait une fausse 'scène de crime' artistique ? On met en scène un 'meurtre' célèbre de la peinture, comme 'La Mort de Marat', et notre présentation serait l'enquête pour trouver l'artiste-coupable.",
+          "position": "left",
+          "expression": "surprised"
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] C'est complètement fou. Mais c'est aussi... génial. C'est le genre d'idée qui vaut un 20/20 ou un 0/20."
+        }
+      ],
+      "choices": [
+        {
+          "text": "C'est l'idée la plus cool que j'ai jamais entendue. Faisons ça !",
+          "next": "scene_3b_alex_enthousiaste",
+          "effects": { "Alex": 10 }
+        },
+        {
+          "text": "J'adore le concept, mais comment on présente ça au prof sans qu'il nous renvoie ?",
+          "next": "scene_3b_alex_pragmatique",
+          "effects": { "Alex": -5 }
+        }
+      ]
+    },
+    "scene_3b_alex_enthousiaste": {
+      "background": "cafe",
+      "dialogues": [
+        {
+          "speaker": "Alex",
+          "text": "Haha, je savais que tu comprendrais ! On va avoir besoin de faux sang et d'un bon éclairage.",
+          "position": "left",
+          "expression": "love"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Vous passez l'heure suivante à imaginer les détails les plus fous, dessinant des plans sur des serviettes en papier. C'est chaotique, mais incroyablement stimulant."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer",
+          "next": "scene_4_reflexion_alex"
+        }
+      ]
+    },
+    "scene_3b_alex_pragmatique": {
+      "background": "cafe",
+      "dialogues": [
+        {
+          "speaker": "Alex",
+          "text": "Ah. Le détail ennuyeux : la réalité. Tu as raison.",
+          "position": "left",
+          "expression": "neutral"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Vous passez un peu de temps à canaliser l'idée d'Alex pour la rendre plus 'académique'. Vous décidez de faire un dossier d'enquête numérique. L'idée de base est conservée, mais sous une forme plus sûre. Alex semble apprécier que vous l'aidiez à structurer ses pensées."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer",
+          "next": "scene_4_reflexion_alex",
+          "effects": { "Alex": 5 }
+        }
+      ]
+    },
+    "scene_3c_julien": {
+      "background": "library",
+      "dialogues": [
+        {
+          "speaker": "Player",
+          "text": "Julien ? Excuse-moi de te déranger. J'ai vu que tu préparais déjà le projet. Tu as déjà un partenaire ?"
+        },
+        {
+          "speaker": "Julien",
+          "text": "Oh, {playerName}. Non, pas encore. Je préfère définir une méthodologie avant de m'engager.",
+          "position": "left",
+          "expression": "neutral"
+        },
+        {
+          "speaker": "Player",
+          "text": "Cette approche me plaît. Je pense qu'on pourrait bien travailler ensemble. Ça te dirait ?"
+        },
+        {
+          "speaker": "Julien",
+          "text": "...D'accord. Ta démarche est logique. Je n'aime pas travailler avec des gens désorganisés. Retrouvons-nous à la bibliothèque. J'ai déjà réservé une salle.",
+          "position": "left",
+          "expression": "happy"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Vous êtes maintenant dans une petite salle de travail privée. Julien a déjà sorti son ordinateur et un plan détaillé."
+        },
+        {
+          "speaker": "Julien",
+          "text": "Voilà. J'ai pensé qu'une analyse comparative de l'utilisation de la lumière dans les œuvres du Caravage et de Rembrandt serait un sujet solide. Les sources sont abondantes, le plan est facile à structurer. C'est efficace.",
+          "position": "left",
+          "expression": "neutral"
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] C'est... parfait. Presque trop parfait. C'est un sujet qui garantit une bonne note, mais il n'y a pas beaucoup de place pour la créativité."
+        }
+      ],
+      "choices": [
+        {
+          "text": "C'est un excellent plan. C'est clair, précis. J'adhère complètement.",
+          "next": "scene_3c_julien_accord",
+          "effects": { "Julien": 10 }
+        },
+        {
+          "text": "C'est très bien structuré, mais ne penses-tu pas que c'est un peu... classique ?",
+          "next": "scene_3c_julien_defi",
+          "effects": { "Julien": -5 }
+        }
+      ]
+    },
+    "scene_3c_julien_accord": {
+      "background": "library",
+      "dialogues": [
+        {
+          "speaker": "Julien",
+          "text": "Bien. L'efficacité est la clé. Je te propose de prendre en charge Le Caravage, je m'occupe de Rembrandt.",
+          "position": "left",
+          "expression": "happy"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Votre session de travail est d'une efficacité redoutable. En moins d'une heure, vous avez un plan complet et une répartition claire des tâches. C'est froid, mais incroyablement rassurant."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer",
+          "next": "scene_4_reflexion_julien"
+        }
+      ]
+    },
+    "scene_3c_julien_defi": {
+      "background": "library",
+      "dialogues": [
+        {
+          "speaker": "Julien",
+          "text": "Le classicisme a fait ses preuves. Le but est la note, pas un prix d'originalité.",
+          "position": "left",
+          "expression": "neutral"
+        },
+        {
+          "speaker": "Player",
+          "text": "Je suis d'accord, mais on pourrait y ajouter une analyse sur l'impact psychologique de leur technique sur le spectateur. Ça donnerait un angle plus personnel."
+        },
+        {
+          "speaker": "Julien",
+          "text": "...Ce n'est pas une mauvaise suggestion. C'est un axe d'analyse pertinent. D'accord. Intégrons-le.",
+          "position": "left",
+          "expression": "happy"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Vous avez réussi à surprendre Julien. Il semble apprécier que vous ayez défié son plan avec une idée intelligente plutôt qu'avec du chaos. Votre collaboration s'annonce plus intéressante que prévu."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer",
+          "next": "scene_4_reflexion_julien",
+          "effects": { "Julien": 5 }
+        }
+      ]
+    },
+    "scene_4_reflexion_mia": {
+      "background": "park",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "La journée se termine. Satisfait(e) de votre nouvelle équipe et du plan que vous avez mis en place, vous décidez de vous promener dans le parc du campus pour prendre l'air."
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Travailler avec Mia, c'était... amusant. J'ai l'impression d'avoir fait le bon choix."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Au détour d'un chemin, votre regard se pose sur une silhouette familière. C'est Alex. Il semble perdu dans ses pensées."
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Je me demande avec qui il a fini par faire équipe... Et ce qui se serait passé si j'avais fait un choix différent tout à l'heure."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Votre téléphone vibre. Un message de Mia s'affiche : 'Super séance aujourd'hui ! Je suis super contente qu'on soit ensemble sur ce projet. Hâte de continuer demain ! :)'"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Un sourire naît sur vos lèvres. Non, décidément, vous ne regrettez rien. Pour l'instant."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer vers l'Épisode 2",
+          "next": "ep2_scene_1_annonce"
+        }
+      ]
+    },
+    "scene_4_reflexion_alex": {
+      "background": "park",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "La journée se termine. Satisfait(e) de votre nouvelle équipe et du plan que vous avez mis en place, vous décidez de vous promener dans le parc du campus pour prendre l'air."
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Travailler avec Alex, c'était... stimulant. J'ai l'impression d'avoir fait le bon choix."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Au détour d'un chemin, votre regard se pose sur une silhouette familière. C'est Julien. Il semble perdu dans ses pensées."
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Je me demande avec qui il a fini par faire équipe... Et ce qui se serait passé si j'avais fait un choix différent tout à l'heure."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Votre téléphone vibre. Un message d'Alex s'affiche : 'Super séance aujourd'hui ! Je suis super content qu'on soit ensemble sur ce projet. Hâte de continuer demain ! :)'"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Un sourire naît sur vos lèvres. Non, décidément, vous ne regrettez rien. Pour l'instant."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer vers l'Épisode 2",
+          "next": "ep2_scene_1_annonce"
+        }
+      ]
+    },
+    "scene_4_reflexion_julien": {
+      "background": "park",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "La journée se termine. Satisfait(e) de votre nouvelle équipe et du plan que vous avez mis en place, vous décidez de vous promener dans le parc du campus pour prendre l'air."
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Travailler avec Julien, c'était... efficace. J'ai l'impression d'avoir fait le bon choix."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Au détour d'un chemin, votre regard se pose sur une silhouette familière. C'est Mia. Elle semble perdue dans ses pensées."
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Je me demande avec qui elle a fini par faire équipe... Et ce qui se serait passé si j'avais fait un choix différent tout à l'heure."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Votre téléphone vibre. Un message de Julien s'affiche : 'Bonne session de travail. Je suis satisfait de notre collaboration. À demain.'"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Un sourire naît sur vos lèvres. Non, décidément, vous ne regrettez rien. Pour l'instant."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer vers l'Épisode 2",
+          "next": "ep2_scene_1_annonce"
+        }
+      ]
+    },
+    "ep2_scene_1_annonce": {
+      "background": "classroom",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Une semaine s'est écoulée. Le travail sur le projet avance bien. La collaboration est agréable. Vous commencez à vous sentir vraiment à votre place ici."
+        },
+        {
+          "speaker": "Professeur",
+          "text": "Juste une dernière information avant que vous ne partiez pour le week-end. Comme vous le savez, ce samedi a lieu le traditionnel 'Festival des Étoiles Filantes' de l'université.",
+          "position": "left",
+          "expression": "neutral"
+        },
+        {
+          "speaker": "Professeur",
+          "text": "Pour valider une partie de votre note de 'Participation à la vie du campus', chaque groupe travaillant sur le projet d'art devra tenir un petit stand. Le thème est libre, tant qu'il est en lien avec l'art.",
+          "position": "left",
+          "expression": "neutral"
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Un stand ? Au festival ? Ça a l'air beaucoup plus amusant que de passer mon week-end à la bibliothèque !"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer",
+          "next": "ep2_scene_2_brainstorm"
+        }
+      ]
+    },
+    "ep2_scene_2_brainstorm": {
+      "background": "library",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Vous retrouvez votre partenaire pour discuter du stand du festival."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer",
+          "next": "ep2_festival_jour",
+          "condition": "partner_any"
+        }
+      ]
+    },
+    "ep2_festival_jour": {
+      "background": "campus",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Le jour du festival est enfin là. Le campus est méconnaissable. Une douce odeur de gaufres flotte dans l'air, mêlée à une musique entraînante."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Le rush du stand est passé. Votre partenaire vous encourage à faire une pause bien méritée."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Au moment où vous vous apprêtez à partir, vous voyez les autres personnages s'approcher de directions différentes."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer",
+          "next": "ep2_carrefour_invitations"
+        }
+      ]
+    },
+    "ep2_carrefour_invitations": {
+      "background": "campus",
+      "dialogues": [
+        {
+          "speaker": "Alex",
+          "text": "Hey, {playerName} ! Tu tombes bien ! Le concert du groupe de rock de l'université va commencer sur la grande scène. L'ambiance va être électrique, tu viens avec moi ?",
+          "position": "right",
+          "expression": "happy"
+        },
+        {
+          "speaker": "Julien",
+          "text": "{playerName}. Si tu as un moment, il y a une exposition de photographies d'étudiants dans le bâtiment des arts, loin de la foule. J'allais y jeter un œil. Ça pourrait t'intéresser.",
+          "position": "left",
+          "expression": "neutral"
+        },
+        {
+          "speaker": "Mia",
+          "text": "{playerName} ! Pause glace ! J'ai vu qu'ils avaient un stand avec des parfums incroyables. Après, on pourrait monter sur la grande roue pour voir tout le festival d'en haut !",
+          "position": "left",
+          "expression": "happy"
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Wow... Tout le monde a l'air d'avoir un plan. Un concert rock, une expo photo tranquille, ou un tour de grande roue... Que faire ?"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Un concert ? Carrément ! Allons-y, Alex.",
+          "next": "ep2_branche_alex",
+          "effects": { "Alex": 15 }
+        },
+        {
+          "text": "Une expo photo, ça me tente bien. Je t'accompagne, Julien.",
+          "next": "ep2_branche_julien",
+          "effects": { "Julien": 15 }
+        },
+        {
+          "text": "La grande roue et une glace ? Mia, tu sais comment me parler !",
+          "next": "ep2_branche_mia",
+          "effects": { "Mia": 15 }
+        }
+      ]
+    },
+    "ep2_branche_alex": {
+      "background": "campus",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "L'ambiance est survoltée. La musique est forte, la basse résonne dans votre poitrine. Alex est dans son élément, il chante à tue-tête et vous entraîne dans l'énergie du moment."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Au milieu d'un solo de guitare particulièrement intense, la foule vous pousse violemment l'un contre l'autre."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Le temps ralentit. Vous êtes visage contre visage, et à cet instant, sous les flashs des lumières de la scène, vous le voyez."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Un fil de lumière, vibrant et d'un rouge électrique, semble vous relier à Alex. Il palpite au rythme de la musique, intense et éphémère. La vision ne dure qu'une seconde."
+        },
+        {
+          "speaker": "Alex",
+          "text": "Désolé ! Ça bouge pas mal !",
+          "position": "right",
+          "expression": "surprised"
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Qu'est-ce que... Ça devait être un reflet des projecteurs. Rien d'autre."
+        },
+        {
+          "speaker": "Alex",
+          "text": "Wow... De près, tes yeux sont encore plus... Euh... CETTE CHANSON EST GÉNIALE, NON ?",
+          "position": "right",
+          "expression": "love"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer",
+          "next": "ep2_scene_etoiles",
+          "effects": { "Alex": 10 }
+        }
+      ]
+    },
+    "ep2_branche_julien": {
+      "background": "library",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Le silence de l'exposition est apaisant. Vous déambulez avec Julien devant des clichés en noir et blanc. Il est étonnamment passionné, commentant la composition avec une précision d'expert."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Vous vous arrêtez devant une photo particulièrement mélancolique d'une jetée sous la brume."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "En observant la photo, vous ressentez une profonde empathie. C'est à cet instant que, dans la lumière douce de la galerie, vous le voyez."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Un fil de lumière fin et stable, d'un blanc argenté, semble vous relier à Julien. Il est discret, presque invisible, comme un fil de soie tendu dans l'air. La vision ne dure qu'une seconde."
+        },
+        {
+          "speaker": "Julien",
+          "text": "Cette photo... Elle capture parfaitement le sentiment de solitude. L'idée que même si on est entouré, on est fondamentalement seul face à l'horizon.",
+          "position": "left",
+          "expression": "sad"
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Un fil de lumière... C'est ridicule. C'est juste un reflet sur la vitre de protection."
+        },
+        {
+          "speaker": "Julien",
+          "text": "C'est un sentiment que je connais bien. Mais... c'est moins pesant quand on le partage, je suppose. Je suis content que tu sois là.",
+          "position": "left",
+          "expression": "happy"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer",
+          "next": "ep2_scene_etoiles",
+          "effects": { "Julien": 10 }
+        }
+      ]
+    },
+    "ep2_branche_mia": {
+      "background": "park",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "La nacelle s'arrête tout en haut. Le bruit du festival s'estompe, remplacé par le murmure du vent. La vue sur le campus illuminé est à couper le souffle."
+        },
+        {
+          "speaker": "Mia",
+          "text": "Wow... C'est magnifique, n'est-ce pas ? On a l'impression d'être au-dessus de tout.",
+          "position": "left",
+          "expression": "love"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Le regard de Mia pétille, reflétant les mille lumières du festival. Elle se tourne vers vous, son visage rayonnant d'un bonheur pur et simple. À cet instant, vous le voyez."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Un fil de lumière chaud et doré, tourbillonnant doucement comme une volute de fumée, vous relie à Mia. Il semble vivant et joyeux. La vision ne dure qu'une seconde."
+        },
+        {
+          "speaker": "Mia",
+          "text": "J'adore ce genre de moments. Tout semble possible, tu ne trouves pas ?",
+          "position": "left",
+          "expression": "happy"
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] J'ai dû avoir le vertige. Ces lumières qui dansent... ça a dû me jouer des tours."
+        },
+        {
+          "speaker": "Mia",
+          "text": "Passer ce moment avec toi, {playerName}... ça le rend encore plus spécial. Je suis vraiment contente qu'on soit amis.",
+          "position": "left",
+          "expression": "love"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer",
+          "next": "ep2_scene_etoiles",
+          "effects": { "Mia": 10 }
+        }
+      ]
+    },
+    "ep2_scene_etoiles": {
+      "background": "park",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "La nuit est tombée. Le clou du spectacle va commencer : le grand lâcher de lanternes."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Le spectacle est magique. Le temps semble suspendu. Des centaines de points lumineux s'élèvent lentement dans le ciel."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "C'est indéniablement beau. Merci de m'avoir accompagné. C'est... plus agréable que de regarder seul."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer",
+          "next": "ep2_scene_retour"
+        }
+      ]
+    },
+    "ep2_scene_retour": {
+      "background": "hallway",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Le festival est terminé. Vous marchez, la tête encore pleine des lumières et des sons de la soirée."
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Cette soirée... C'était bien plus qu'un simple festival. Et cette étrange lueur... C'était si réel. Peut-être que ce n'était pas juste la fatigue..."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Votre téléphone vibre. Un message s'affiche : 'Merci pour ce soir. C'était un moment... spécial. Bonne nuit, {playerName}.'"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Un sourire naît sur vos lèvres. L'année universitaire ne fait que commencer, mais vous avez le sentiment que des liens importants sont déjà en train de se tisser. Et que, peut-être, tout n'est pas exactement comme il y paraît."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Fin de l'Épisode 2",
+          "next": "end_episode_1"
+        }
+      ]
+    },
+    "end_episode_1": {
+      "background": "park",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Fin de l'Épisode 1 : Le Projet"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Merci d'avoir joué ! L'histoire de {playerName} continuera bientôt..."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Retourner au menu principal",
+          "next": "restart"
+        }
+      ]
+    }
+  }
+}

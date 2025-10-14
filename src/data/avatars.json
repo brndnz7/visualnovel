@@ -1,0 +1,12 @@
+{
+  "player_f_1": {
+    "id": "player_f_1",
+    "gender": "female",
+    "image": "/assets/characters/female-smile2.png"
+  },
+  "player_m_1": {
+    "id": "player_m_1",
+    "gender": "male",
+    "image": "/assets/characters/male-smile1.png"
+  }
+}

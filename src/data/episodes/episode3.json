@@ -1,0 +1,486 @@
+{
+  "id": "episode3",
+  "title": "Les Murmures Croissants",
+  "description": "Les visions deviennent plus précises et plus terrifiantes",
+  "startScene": "ep3_scene1_fissures",
+  "scenes": {
+    "ep3_scene1_fissures": {
+      "background": "library",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Les jours qui suivent le festival sont productifs. Le travail avec {partner} est devenu une routine agréable. Pourtant, depuis cette soirée, quelque chose a changé en vous."
+        },
+        {
+          "speaker": "{partner}",
+          "text": "Tu passes la page 73 ? Je crois que j'ai trouvé la référence dont on a besoin pour...",
+          "expression": "happy",
+          "position": "right"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Alors que vous tendez le livre à {partner}, votre main effleure la sienne."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "[VISION FLASH]",
+          "emoticon": "shocked"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Flash blanc très rapide. L'écho lointain d'une tasse qui se brise. Une odeur de café très forte."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Vous sursautez légèrement, faisant tomber un stylo."
+        },
+        {
+          "speaker": "{partner}",
+          "text": "Ça va, {playerName} ? Tu as l'air ailleurs aujourd'hui.",
+          "expression": "surprised",
+          "position": "right"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Oui, oui, désolé... J'ai juste... mal dormi, je crois.",
+          "next": "ep3_scene1_cafe"
+        }
+      ]
+    },
+    "ep3_scene1_cafe": {
+      "background": "library",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Au même moment, à l'autre bout de la bibliothèque, un étudiant laisse échapper sa tasse de café qui se fracasse sur le sol. Le bruit et l'odeur sont exactement ceux de votre 'vision'."
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Non. C'est une coïncidence. Une simple et pure coïncidence. Ça doit l'être.",
+          "emoticon": "nervous"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer...",
+          "next": "ep3_scene2_escalier"
+        }
+      ]
+    },
+    "ep3_scene2_escalier": {
+      "background": "school_hallway",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Vous sortez de la bibliothèque avec {partner}, discutant des dernières retouches à apporter à votre stand."
+        },
+        {
+          "speaker": "{partner}",
+          "text": "On doit juste aller chercher le matériel qu'on a laissé dans l'atelier d'art. Faisons vite.",
+          "expression": "neutral",
+          "position": "right"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Vous entrez dans le bâtiment des arts. L'endroit est plus calme. La lumière du soleil couchant traverse les grandes fenêtres."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Devant vous, au pied du grand escalier, vous apercevez Alex. Il a l'air pressé, jonglant avec une grande toile et un sac de matériel qui semble sur le point de craquer."
+        },
+        {
+          "speaker": "Alex",
+          "text": "Allez, allez, je vais être en retard...",
+          "expression": "neutral",
+          "position": "left"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Il commence à monter les premières marches. C'est à cet instant précis que le monde autour de vous se déforme."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "[VISION LONGUE]",
+          "emoticon": "shocked"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "L'écran se teinte de bleu, les couleurs se désaturent. Le son du monde extérieur s'estompe complètement."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "La scène se joue au ralenti : Vous voyez la lanière du sac d'Alex se déchirer. Des pots de peinture tombent sur les marches. En voulant les éviter, son pied glisse sur une flaque d'eau. Vous voyez son corps basculer en arrière."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Un craquement sec et horrible. Gros plan sur le visage d'Alex, tordu de douleur."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "La vision se termine brutalement. Le son et les couleurs reviennent à la normale. Vous êtes haletant(e)."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "La scène n'a duré qu'une seconde dans votre esprit, mais vous l'avez vécue avec une clarté terrifiante. Devant vous, la réalité est intacte. Alex vient de poser le pied sur la troisième marche."
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Ça va arriver. Dans moins de cinq secondes, ça va arriver. Je le sais. Ce n'est pas une coïncidence. C'est réel.",
+          "emoticon": "nervous"
+        }
+      ],
+      "choices": [
+        {
+          "text": "INTERVENIR - Se jeter en avant pour sauver Alex",
+          "next": "ep3_scene3a_intervention",
+          "effects": { "Alex": -10 }
+        },
+        {
+          "text": "NE RIEN FAIRE - Rester paralysé(e)",
+          "next": "ep3_scene3b_nonintervention",
+          "effects": { "Alex": -5 }
+        }
+      ]
+    },
+    "ep3_scene3a_intervention": {
+      "background": "school_hallway",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Sans réfléchir, vous vous élancez."
+        },
+        {
+          "speaker": "Player",
+          "text": "ALEX, ATTENTION !",
+          "emoticon": "shocked"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Vous vous jetez en avant et bousculez volontairement Alex, le faisant trébucher sur les premières marches, mais sans tomber dans l'escalier. Les pots de peinture s'étalent sur le sol, mais sa toile et son poignet sont saufs."
+        },
+        {
+          "speaker": "Alex",
+          "text": "Mais ça va pas, {playerName} ?! Tu es complètement fou/folle ou quoi ? Regarde ce que tu as fait !",
+          "expression": "angry",
+          "position": "left",
+          "emoticon": "angry"
+        },
+        {
+          "speaker": "{partner}",
+          "text": "{playerName}, qu'est-ce qui t'a pris ? Tu aurais pu le blesser !",
+          "expression": "surprised",
+          "position": "right"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Je... j'ai vu que ton sac allait lâcher, j'ai paniqué.",
+          "next": "ep3_scene3a_reponse1",
+          "effects": { "Alex": -10 }
+        },
+        {
+          "text": "Il y avait une flaque d'eau, tu allais glisser.",
+          "next": "ep3_scene3a_reponse2",
+          "effects": { "Alex": -5 }
+        },
+        {
+          "text": "Je... je ne sais pas ce qui m'a pris. Je suis vraiment désolé(e).",
+          "next": "ep3_scene3a_reponse3",
+          "effects": { "Alex": -10 }
+        }
+      ]
+    },
+    "ep3_scene3a_reponse1": {
+      "background": "school_hallway",
+      "dialogues": [
+        {
+          "speaker": "Alex",
+          "text": "Paniqué ? Tu m'as pratiquement plaqué ! Maintenant, regarde ce bazar...",
+          "expression": "angry",
+          "position": "left"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Alex, bien qu'indemne, est maintenant distant et méfiant. Votre partenaire vous regarde avec une profonde confusion. Vous avez changé le destin, mais le prix est social."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer...",
+          "next": "ep3_scene4_confrontation"
+        }
+      ]
+    },
+    "ep3_scene3a_reponse2": {
+      "background": "school_hallway",
+      "dialogues": [
+        {
+          "speaker": "Alex",
+          "text": "Une flaque d'eau ? Je ne suis pas un enfant, je l'aurais vue ! Tu es vraiment bizarre, parfois.",
+          "expression": "annoyed",
+          "position": "left"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Alex, bien qu'indemne, est maintenant distant et méfiant. Votre partenaire vous regarde avec une profonde confusion."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer...",
+          "next": "ep3_scene4_confrontation"
+        }
+      ]
+    },
+    "ep3_scene3a_reponse3": {
+      "background": "school_hallway",
+      "dialogues": [
+        {
+          "speaker": "Alex",
+          "text": "Laisse tomber. Fais juste plus attention la prochaine fois.",
+          "expression": "neutral",
+          "position": "left"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Alex s'éloigne en secouant la tête. Votre partenaire reste silencieux, vous observant avec inquiétude."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer...",
+          "next": "ep3_scene4_confrontation"
+        }
+      ]
+    },
+    "ep3_scene3b_nonintervention": {
+      "background": "school_hallway",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Vous restez figé(e), paralysé(e) par le choc de la vision. Le temps semble s'étirer."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "La scène se déroule exactement comme dans votre vision : la lanière du sac se déchire, les pots tombent, Alex glisse sur la flaque d'eau et tombe en arrière.",
+          "emoticon": "shocked"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Le craquement sec de son poignet résonne dans le hall silencieux."
+        },
+        {
+          "speaker": "Alex",
+          "text": "Aaargh... M-mon poignet...",
+          "expression": "sad",
+          "position": "left",
+          "emoticon": "sob"
+        },
+        {
+          "speaker": "{partner}",
+          "text": "Alex ! Oh mon dieu ! {playerName}, viens m'aider, reste pas planté(e) là !",
+          "expression": "surprised",
+          "position": "right"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Vous vous approchez, les jambes tremblantes. La culpabilité vous submerge. Vous l'avez vu. Vous saviez. Et vous n'avez rien fait."
+        },
+        {
+          "speaker": "Alex",
+          "text": "Ton visage... Juste avant que je tombe... On aurait dit que tu avais vu un fantôme. C'était... bizarre.",
+          "expression": "surprised",
+          "position": "left"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Votre silence est pesant. Votre partenaire vous lance un regard inquiet, ne comprenant pas votre réaction. Vous avez préservé la 'normalité', mais le prix est une culpabilité écrasante."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer...",
+          "next": "ep3_scene4_confrontation"
+        }
+      ]
+    },
+    "ep3_scene4_confrontation": {
+      "background": "apartment_exterior",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "La fin de journée est lourde. L'image de l'accident (ou de votre intervention étrange) tourne en boucle dans votre esprit. Votre partenaire vous a raccompagné(e)."
+        },
+        {
+          "speaker": "{partner}",
+          "text": "Écoute, {playerName}... Ce qui s'est passé tout à l'heure avec Alex... C'était vraiment étrange. Tout va bien ? Tu peux me parler, tu sais.",
+          "expression": "neutral",
+          "position": "right"
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] C'est le moment. Est-ce que je peux vraiment lui faire confiance ? Ou est-ce que je vais juste passer pour un(e) fou/folle ?",
+          "emoticon": "thinking"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Je dois te dire quelque chose d'étrange. J'ai eu... un très mauvais pressentiment.",
+          "next": "ep3_scene4_confession",
+          "effects": { "{partner}": 10 }
+        },
+        {
+          "text": "Ce n'est rien, vraiment. Juste le stress des études. J'étais sur les nerfs.",
+          "next": "ep3_scene4_mensonge",
+          "effects": { "{partner}": -5 }
+        },
+        {
+          "text": "Je ne peux pas vraiment en parler. C'est compliqué.",
+          "next": "ep3_scene4_evasion",
+          "effects": { "{partner}": -10 }
+        }
+      ]
+    },
+    "ep3_scene4_confession": {
+      "background": "apartment_exterior",
+      "dialogues": [
+        {
+          "speaker": "{partner}",
+          "text": "Un pressentiment ? Comment ça ?",
+          "expression": "surprised",
+          "position": "right"
+        },
+        {
+          "speaker": "Player",
+          "text": "Je... je ne sais pas comment l'expliquer. Mais j'ai vu ce qui allait se passer. Avant que ça arrive.",
+          "emoticon": "nervous"
+        },
+        {
+          "speaker": "{partner}",
+          "text": "Tu veux dire... comme une intuition ?",
+          "expression": "neutral",
+          "position": "right"
+        },
+        {
+          "speaker": "Player",
+          "text": "Plus que ça. C'était comme... une vision. Très claire."
+        },
+        {
+          "speaker": "{partner}",
+          "text": "{playerName}, ça m'inquiète pour toi. Peut-être que tu devrais te reposer un peu ? Le stress peut faire des choses étranges...",
+          "expression": "sad",
+          "position": "right"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Vous avez partagé une partie de votre fardeau. Votre partenaire est inquiet, mais il/elle ne vous juge pas."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer...",
+          "next": "ep3_scene5_seul"
+        }
+      ]
+    },
+    "ep3_scene4_mensonge": {
+      "background": "apartment_exterior",
+      "dialogues": [
+        {
+          "speaker": "{partner}",
+          "text": "Si tu le dis... Mais n'hésite pas si ça ne va pas, d'accord ?",
+          "expression": "neutral",
+          "position": "right"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Votre partenaire n'a pas l'air convaincu. Un petit fossé se crée entre vous."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer...",
+          "next": "ep3_scene5_seul"
+        }
+      ]
+    },
+    "ep3_scene4_evasion": {
+      "background": "apartment_exterior",
+      "dialogues": [
+        {
+          "speaker": "{partner}",
+          "text": "D'accord. Comme tu veux.",
+          "expression": "sad",
+          "position": "right"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Votre partenaire est visiblement blessé(e) par votre manque de confiance. L'ambiance devient froide."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer...",
+          "next": "ep3_scene5_seul"
+        }
+      ]
+    },
+    "ep3_scene5_seul": {
+      "background": "bedroom_night",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "La nuit est tombée. Vous êtes seul(e) dans votre chambre, mais votre esprit est en ébullition."
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Ce n'est pas mon imagination. Ce n'est pas le stress. C'est réel. Je peux voir des choses avant qu'elles n'arrivent.",
+          "emoticon": "thinking"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Vous vous regardez dans un miroir."
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Qu'est-ce que ça veut dire ? Qu'est-ce que je suis censé(e) faire de ça ?"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Pour la première fois depuis votre arrivée à l'Université Starlight, vous vous sentez profondément et dangereusement seul(e)."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "L'aventure ne fait que commencer, mais l'innocence est déjà perdue."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Fin de l'Épisode 3",
+          "next": "end_episode_3"
+        }
+      ]
+    },
+    "end_episode_3": {
+      "background": "black",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Épisode 3 : Les Murmures Croissants - Terminé"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "À suivre..."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Retour au menu",
+          "next": "main_menu"
+        }
+      ]
+    }
+  }
+}
+
