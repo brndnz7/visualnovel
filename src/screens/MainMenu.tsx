@@ -110,10 +110,10 @@ export const MainMenu: React.FC = () => {
         <div className="flex-1 text-center lg:text-left">
           <div className={`${!mounted ? 'opacity-0 translate-y-10' : 'opacity-100 translate-y-0'} transition-all duration-1000`}>
             <h1
-              className="text-6xl lg:text-8xl font-bold text-gray-800 drop-shadow-2xl mb-6"
+              className="text-6xl lg:text-8xl font-bold text-white drop-shadow-2xl mb-6"
               style={{ 
                 fontFamily: "'Quicksand', sans-serif",
-                textShadow: '0 2px 10px rgba(236, 72, 153, 0.2)',
+                textShadow: '0 2px 10px rgba(255, 255, 255, 0.25)',
               }}
             >
               Dissonance
@@ -125,21 +125,21 @@ export const MainMenu: React.FC = () => {
                 boxShadow: '0 2px 10px rgba(236, 72, 153, 0.3)',
               }}
             />
-            <p className="text-2xl lg:text-3xl text-gray-700 mb-4 font-semibold tracking-wide">
+            <p className="text-2xl lg:text-3xl text-white mb-4 font-semibold tracking-wide">
               Une histoire dont vous êtes le héros
             </p>
-            <p className="text-lg text-gray-600 mb-8">
+            <p className="text-lg text-white/80 mb-8">
               Vivez une aventure romantique inoubliable
             </p>
 
             {/* Boutons secondaires simplifiés */}
             <div className="flex gap-3 justify-center lg:justify-start flex-wrap mt-8">
               <button 
-                className="px-6 py-3 rounded-xl transition-all hover:scale-105 flex items-center gap-2 font-bold text-gray-700 border-2 border-gray-300"
+                className="px-6 py-3 rounded-xl transition-all hover:scale-105 flex items-center gap-2 font-bold text-white border-2 border-white/30"
                 onClick={() => setGameState('Shop')}
                 style={{
-                  background: 'rgba(255, 255, 255, 0.7)',
-                  backdropFilter: 'blur(10px)',
+                  background: 'rgba(255, 255, 255, 0.12)',
+                  backdropFilter: 'blur(12px)',
                 }}
               >
                 <Coins size={20} />
@@ -147,10 +147,10 @@ export const MainMenu: React.FC = () => {
               </button>
               
               <button 
-                className="px-6 py-3 rounded-xl transition-all hover:scale-105 flex items-center gap-2 font-bold text-gray-700 border-2 border-gray-300"
+                className="px-6 py-3 rounded-xl transition-all hover:scale-105 flex items-center gap-2 font-bold text-white border-2 border-white/30"
                 style={{
-                  background: 'rgba(255, 255, 255, 0.7)',
-                  backdropFilter: 'blur(10px)',
+                  background: 'rgba(255, 255, 255, 0.12)',
+                  backdropFilter: 'blur(12px)',
                 }}
               >
                 <Heart size={20} />
@@ -158,10 +158,10 @@ export const MainMenu: React.FC = () => {
               </button>
 
               <button 
-                className="px-6 py-3 rounded-xl transition-all hover:scale-105 flex items-center gap-2 font-bold text-gray-700 border-2 border-gray-300"
+                className="px-6 py-3 rounded-xl transition-all hover:scale-105 flex items-center gap-2 font-bold text-white border-2 border-white/30"
                 style={{
-                  background: 'rgba(255, 255, 255, 0.7)',
-                  backdropFilter: 'blur(10px)',
+                  background: 'rgba(255, 255, 255, 0.12)',
+                  backdropFilter: 'blur(12px)',
                 }}
               >
                 <Info size={20} />
