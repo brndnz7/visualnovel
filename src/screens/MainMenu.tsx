@@ -49,11 +49,11 @@ export const MainMenu: React.FC = () => {
           borderRadius: isPrimary ? '20px' : '16px',
           background: isPrimary 
             ? (isHovered ? 'linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%)' : 'linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%)')
-            : (isHovered ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.1)'),
-          border: isPrimary ? '2px solid rgba(255, 255, 255, 0.3)' : '2px solid rgba(255, 255, 255, 0.2)',
+            : (isHovered ? 'rgba(255, 255, 255, 0.28)' : 'rgba(255, 255, 255, 0.18)'),
+          border: isPrimary ? '2px solid rgba(255, 255, 255, 0.35)' : '2px solid rgba(255, 255, 255, 0.35)',
           boxShadow: isHovered 
-            ? (isPrimary ? '0 8px 30px rgba(0, 0, 0, 0.2)' : '0 4px 20px rgba(255, 255, 255, 0.1)')
-            : (isPrimary ? '0 4px 15px rgba(0, 0, 0, 0.1)' : 'none'),
+            ? (isPrimary ? '0 8px 30px rgba(0, 0, 0, 0.2)' : '0 6px 24px rgba(15, 23, 42, 0.35)')
+            : (isPrimary ? '0 4px 15px rgba(0, 0, 0, 0.1)' : '0 2px 12px rgba(15, 23, 42, 0.25)'),
           transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
         }}
       >
@@ -82,26 +82,26 @@ export const MainMenu: React.FC = () => {
     <div 
       className="w-full h-full flex items-center justify-center p-8 overflow-hidden relative"
       style={{
-        background: 'linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%)',
+        background: 'linear-gradient(135deg, #1f2937 0%, #111827 50%, #0f172a 100%)',
       }}
     >
       {/* Pattern géométrique en arrière-plan */}
       <div className="absolute inset-0" style={{
         backgroundImage: `
-          linear-gradient(to right, rgba(236,72,153,0.05) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(236,72,153,0.05) 1px, transparent 1px)
+          linear-gradient(to right, rgba(148,163,184,0.08) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(148,163,184,0.08) 1px, transparent 1px)
         `,
         backgroundSize: '60px 60px',
       }} />
 
       {/* Overlay doux */}
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-100/20 via-fuchsia-50/10 to-pink-200/20" />
+      <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-slate-900/30 to-purple-900/40" />
 
       {/* Effets lumineux subtils */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute w-[500px] h-[500px] bg-pink-200/15 rounded-full blur-3xl -top-32 -left-32 animate-pulse" style={{ animationDuration: '8s' }} />
-        <div className="absolute w-[400px] h-[400px] bg-fuchsia-200/12 rounded-full blur-3xl top-20 right-10 animate-pulse" style={{ animationDelay: '2s', animationDuration: '10s' }} />
-        <div className="absolute w-[600px] h-[600px] bg-pink-300/10 rounded-full blur-3xl -bottom-40 left-1/3 animate-pulse" style={{ animationDelay: '4s', animationDuration: '12s' }} />
+        <div className="absolute w-[500px] h-[500px] bg-indigo-500/15 rounded-full blur-3xl -top-32 -left-32 animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute w-[400px] h-[400px] bg-purple-500/12 rounded-full blur-3xl top-20 right-10 animate-pulse" style={{ animationDelay: '2s', animationDuration: '10s' }} />
+        <div className="absolute w-[600px] h-[600px] bg-rose-500/12 rounded-full blur-3xl -bottom-40 left-1/3 animate-pulse" style={{ animationDelay: '4s', animationDuration: '12s' }} />
       </div>
       
       {/* Contenu principal */}
