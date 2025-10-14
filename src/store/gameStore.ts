@@ -1,10 +1,9 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { GAME_CONFIG, LOCAL_STORAGE_KEY, GameState, NotificationType } from '../config/game';
-import { AudioManager, sounds } from '../utils/audio';
+import { AudioManager } from '../utils/audio';
 import { CustomCharacter } from '../types/characterCreator';
 import { PhoneConversation, PhoneMessage } from '../types/phone';
-import { getAllScenes } from '../data/episodeLoader';
 import charactersData from '../data/characters.json';
 import storyData from '../data/story.json';
 
@@ -228,7 +227,7 @@ export const useGameStore = create<GameStoreState>()(
       },
 
       makeChoice: (choice) => {
-        const { energy, useEnergy, relationships, currentSceneId, flags } = get();
+        const { energy, useEnergy, relationships, currentSceneId } = get();
         
         // Vérifier les conditions du choix
         if (choice.condition && !get().checkCondition(choice.condition)) {

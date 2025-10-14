@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Check } from 'lucide-react';
 import { useGameStore } from '../store/gameStore';
 import { CustomCharacter, DEFAULT_CHARACTER, CHARACTER_CREATOR_OPTIONS } from '../types/characterCreator';
@@ -10,6 +10,9 @@ export const CharacterCreatorScreen: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<'base' | 'hair' | 'eyes' | 'eyebrows' | 'mouth' | 'clothes' | 'accessories'>('base');
   const setCustomCharacter = useGameStore((s) => s.setCustomCharacter);
   const goBack = useGameStore((s) => s.goBack);
+
+  const femaleOptions = CHARACTER_CREATOR_OPTIONS.female;
+  const maleOptions = CHARACTER_CREATOR_OPTIONS.male;
   
   const isMale = character.gender === 'male';
   
@@ -38,7 +41,7 @@ export const CharacterCreatorScreen: React.FC = () => {
   };
 
   const renderOptions = () => {
-    const options = isMale ? CHARACTER_CREATOR_OPTIONS.male : CHARACTER_CREATOR_OPTIONS.female;
+    const options = isMale ? maleOptions : femaleOptions;
     
     switch (activeCategory) {
       case 'base':
@@ -122,12 +125,13 @@ export const CharacterCreatorScreen: React.FC = () => {
         );
 
       case 'eyes':
+        const femaleEyeOptions = femaleOptions;
         return (
           <div className="space-y-6">
             <div>
               <h4 className="text-lg font-semibold text-gray-700 mb-3">Forme des yeux</h4>
               <div className="grid grid-cols-3 gap-4">
-                {Array.from({ length: CHARACTER_CREATOR_OPTIONS.eyeStyles }, (_, i) => i + 1).map((num) => (
+                {Array.from({ length: femaleEyeOptions.eyeStyles }, (_, i) => i + 1).map((num) => (
                   <button
                     key={num}
                     onClick={() => updateCharacter({ eyes: { ...character.eyes, style: num } })}
@@ -148,7 +152,7 @@ export const CharacterCreatorScreen: React.FC = () => {
             <div>
               <h4 className="text-lg font-semibold text-gray-700 mb-3">Couleur des yeux</h4>
               <div className="grid grid-cols-5 gap-3">
-                {Array.from({ length: CHARACTER_CREATOR_OPTIONS.eyeColors }, (_, i) => i + 1).map((num) => (
+                {Array.from({ length: femaleEyeOptions.eyeColors }, (_, i) => i + 1).map((num) => (
                   <button
                     key={num}
                     onClick={() => updateCharacter({ eyes: { ...character.eyes, color: num } })}
@@ -173,7 +177,7 @@ export const CharacterCreatorScreen: React.FC = () => {
         if (isMale) return null; // Pas utilisé pour les hommes
         return (
           <div className="grid grid-cols-5 gap-4">
-            {Array.from({ length: options.eyebrows || 0 }, (_, i) => i + 1).map((num) => (
+            {Array.from({ length: femaleOptions.eyebrows }, (_, i) => i + 1).map((num) => (
               <button
                 key={num}
                 onClick={() => updateCharacter({ eyebrows: num })}
@@ -194,7 +198,7 @@ export const CharacterCreatorScreen: React.FC = () => {
 
       case 'mouth':
         const mouthLabel = isMale ? 'Expression' : 'Bouche';
-        const mouthCount = isMale ? options.expressions : options.mouths;
+        const mouthCount = isMale ? maleOptions.expressions : femaleOptions.mouths;
         const expressionNames = isMale ? [
           'Normal', 'Smile 1', 'Smile 2', 'Smile 3', 'Laugh', 
           'Surprised', 'Smirk', 'Angry 1', 'Angry 2', 'Sad', 'Sweat'
@@ -234,7 +238,7 @@ export const CharacterCreatorScreen: React.FC = () => {
           
           return (
             <div className="grid grid-cols-4 gap-3">
-              {Array.from({ length: options.outfits || 0 }, (_, i) => i + 1).map((num) => (
+              {Array.from({ length: maleOptions.outfits }, (_, i) => i + 1).map((num) => (
                 <button
                   key={num}
                   onClick={() => updateCharacter({ top: { style: num, color: 1 } })}
@@ -260,7 +264,7 @@ export const CharacterCreatorScreen: React.FC = () => {
             <div>
               <h4 className="text-lg font-semibold text-gray-700 mb-3">Haut</h4>
               <div className="grid grid-cols-5 gap-3">
-                {Array.from({ length: options.topStyles || 0 }, (_, i) => i + 1).map((num) => (
+                {Array.from({ length: femaleOptions.topStyles }, (_, i) => i + 1).map((num) => (
                   <button
                     key={num}
                     onClick={() => updateCharacter({ top: { ...character.top, style: num } })}
@@ -278,7 +282,7 @@ export const CharacterCreatorScreen: React.FC = () => {
                 ))}
               </div>
               <div className="grid grid-cols-6 gap-2 mt-3">
-                {Array.from({ length: options.topColors || 0 }, (_, i) => i + 1).map((num) => (
+                {Array.from({ length: femaleOptions.topColors }, (_, i) => i + 1).map((num) => (
                   <button
                     key={num}
                     onClick={() => updateCharacter({ top: { ...character.top, color: num } })}
@@ -299,7 +303,7 @@ export const CharacterCreatorScreen: React.FC = () => {
             <div>
               <h4 className="text-lg font-semibold text-gray-700 mb-3">Bas</h4>
               <div className="grid grid-cols-3 gap-4">
-                {Array.from({ length: options.bottomStyles || 0 }, (_, i) => i + 1).map((num) => (
+                {Array.from({ length: femaleOptions.bottomStyles }, (_, i) => i + 1).map((num) => (
                   <button
                     key={num}
                     onClick={() => updateCharacter({ bottom: { ...character.bottom, style: num } })}
@@ -317,7 +321,7 @@ export const CharacterCreatorScreen: React.FC = () => {
                 ))}
               </div>
               <div className="grid grid-cols-6 gap-2 mt-3">
-                {Array.from({ length: options.bottomColors || 0 }, (_, i) => i + 1).map((num) => (
+                {Array.from({ length: femaleOptions.bottomColors }, (_, i) => i + 1).map((num) => (
                   <button
                     key={num}
                     onClick={() => updateCharacter({ bottom: { ...character.bottom, color: num } })}
@@ -344,7 +348,7 @@ export const CharacterCreatorScreen: React.FC = () => {
         
         return (
           <div className="grid grid-cols-5 gap-4">
-            {Array.from({ length: (options.accessories || 0) + 1 }, (_, i) => i).map((num) => (
+            {Array.from({ length: maleOptions.accessories + 1 }, (_, i) => i).map((num) => (
               <button
                 key={num}
                 onClick={() => updateCharacter({ accessories: num })}

@@ -12,7 +12,6 @@ export const SaveLoadScreen: React.FC<SaveLoadScreenProps> = ({ mode }) => {
   const setGameState = useGameStore((s) => s.setGameState);
   const gameState = useGameStore((s) => s);
   const [saves, setSaves] = useState<(SaveSlot | null)[]>([]);
-  const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
   const [showConfirmDelete, setShowConfirmDelete] = useState<number | null>(null);
 
   useEffect(() => {

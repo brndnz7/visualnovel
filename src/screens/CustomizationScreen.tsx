@@ -1,19 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ChevronLeft, User } from 'lucide-react';
 import { useGameStore } from '../store/gameStore';
-import avatarsData from '../data/avatars.json';
 
 export const CustomizationScreen: React.FC = () => {
-  const setPlayerAvatar = useGameStore((s) => s.setPlayerAvatar);
   const setGameState = useGameStore((s) => s.setGameState);
   const goBack = useGameStore((s) => s.goBack);
-  const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
-
-  const handleConfirm = () => {
-    if (selectedAvatar) {
-      setPlayerAvatar(selectedAvatar);
-    }
-  };
 
   return (
     <div 

@@ -12,7 +12,6 @@ import { DialogueHistory } from '../components/DialogueHistory';
 import { PauseMenu } from '../components/PauseMenu';
 import { AnimatedEmoticon, EMOTICON_MAP } from '../components/AnimatedEmoticon';
 import { getAllScenes } from '../data/episodeLoader';
-import storyData from '../data/story.json';
 import charactersData from '../data/characters.json';
 
 interface Scene {
@@ -52,8 +51,8 @@ export const GameScene: React.FC = () => {
   const [activeEmoticon, setActiveEmoticon] = useState<number | null>(null);
 
   // Charger toutes les scènes (épisodes 1, 2, 3)
-  const allScenes = useMemo(() => getAllScenes(), []);
-  const scene = allScenes[currentSceneId] as Scene;
+  const allScenes = useMemo(() => getAllScenes() as unknown as Record<string, Scene>, []);
+  const scene = allScenes[currentSceneId];
 
   // Vérification de sécurité : si la scène n'existe pas, retourner au menu principal
   if (!scene) {
