@@ -85,13 +85,13 @@ export const MainMenu: React.FC = () => {
     <div 
       className="w-full h-full flex items-center justify-center relative overflow-hidden"
       style={{
-        backgroundImage: 'url(/backgrounds/Pasillo 2.png)',
+        backgroundImage: 'url(/ressources/VN backgrounds FHD/Pasillo 2.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
       {/* Overlay sombre */}
-      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 bg-black/50" />
       
       {/* Effet de distorsion subtile */}
       <div className="absolute inset-0 opacity-30">
