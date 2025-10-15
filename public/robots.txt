@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://dissonance-game.web.app/sitemap.xml
+
+# Disallow admin pages (if any)
+Disallow: /admin/
+
+# Allow all assets
+Allow: /assets/
+Allow: /backgrounds/
+Allow: /characters/
+
