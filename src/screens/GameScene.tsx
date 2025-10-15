@@ -59,18 +59,16 @@ export const GameScene: React.FC = () => {
   const allScenes = useMemo(() => getAllScenes() as unknown as Record<string, Scene>, []);
   const scene = allScenes[currentSceneId];
 
-  // Vérification de sécurité : si la scène n'existe pas, retourner au menu principal
-  if (!scene) {
-    console.error(`Scène introuvable: ${currentSceneId}`);
-    setGameState('MainMenu');
-    return (
-      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-pink-900 to-purple-900">
-        <div className="text-white text-xl">Erreur : Scène introuvable. Retour au menu...</div>
-      </div>
-    );
-  }
+  // Effect pour rediriger si scène introuvable (AVANT le return conditionnel)
+  useEffect(() => {
+    if (!scene && currentSceneId !== 'main_menu') {
+      console.error(`Scène introuvable: ${currentSceneId}`);
+      setGameState('MainMenu');
+    }
+  }, [scene, currentSceneId, setGameState]);
 
   useEffect(() => {
+    if (!scene) return;
     setDialogueIndex(0);
     setShowChoices(false);
     
@@ -85,7 +83,7 @@ export const GameScene: React.FC = () => {
   }, [currentSceneId, scene]);
 
   // Définir les variables avant les useEffects qui les utilisent
-  const activeDialogue = scene.dialogues[dialogueIndex];
+  const activeDialogue = scene?.dialogues[dialogueIndex];
   const currentSpeaker = activeDialogue ? activeDialogue.speaker : null;
 
   // Afficher l'émoticône si le dialogue en a une
@@ -102,12 +100,17 @@ export const GameScene: React.FC = () => {
   }, [activeDialogue]);
 
   const handleNext = useCallback(() => {
+    if (!scene) return;
     if (dialogueIndex < scene.dialogues.length - 1) {
       setDialogueIndex((i) => i + 1);
     } else {
       setShowChoices(true);
+      // Désactiver le skip mode quand on arrive aux choix
+      if (isSkipMode) {
+        useGameStore.getState().toggleSkipMode();
+      }
     }
-  }, [dialogueIndex, scene.dialogues.length]);
+  }, [dialogueIndex, scene, isSkipMode]);
 
   // Ajouter le dialogue actuel à l'historique
   useEffect(() => {
@@ -118,17 +121,19 @@ export const GameScene: React.FC = () => {
 
   // Trouver tous les personnages dans la scène
   const sceneCharacters = useMemo(() => {
+    if (!scene) return [];
     const speakers = new Set(scene.dialogues.map((d) => d.speaker));
     return Array.from(speakers).filter((speakerId) => charactersData[speakerId as keyof typeof charactersData]);
   }, [scene]);
 
   // Filtrer les choix selon les conditions
   const availableChoices = useMemo(() => {
+    if (!scene) return [];
     return scene.choices.filter((choice) => {
       if (!choice.condition) return true;
       return checkCondition(choice.condition);
     });
-  }, [scene.choices, checkCondition]);
+  }, [scene, checkCondition]);
 
   // Mode Auto : avancer automatiquement
   useEffect(() => {
@@ -225,6 +230,15 @@ export const GameScene: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [showChoices, availableChoices, handleNext, makeChoice, showHistory, showPause]);
 
+  // Vérification finale : afficher un message si pas de scène
+  if (!scene) {
+    return (
+      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-pink-900 to-purple-900">
+        <div className="text-white text-xl">Chargement...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full h-full relative overflow-hidden bg-black">
       {/* Couche de fondu noir */}
@@ -280,13 +294,13 @@ export const GameScene: React.FC = () => {
         });
       })()}
 
-      {/* Émoticône animée */}
+      {/* Émoticône animée - à côté de la tête du personnage */}
       {activeEmoticon && (
         <AnimatedEmoticon
           emoticonId={activeEmoticon}
           onComplete={() => setActiveEmoticon(null)}
-          size="large"
-          position="center"
+          size="medium"
+          position={currentSpeaker === 'Player' || sceneCharacters.length === 0 ? "center" : "topright"}
         />
       )}
 

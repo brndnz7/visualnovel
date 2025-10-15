@@ -73,21 +73,21 @@ export const AuthScreen: React.FC = () => {
   return (
     <div className="w-full h-full flex items-center justify-center p-4"
       style={{
-        background: 'linear-gradient(135deg, #1f2937 0%, #111827 50%, #0f172a 100%)',
+        background: 'linear-gradient(135deg, #3b0764 0%, #701a75 30%, #be185d 60%, #db2777 100%)',
       }}
     >
       {/* Grille de fond */}
       <div className="absolute inset-0" style={{
         backgroundImage: `
-          linear-gradient(to right, rgba(99,102,241,0.05) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(99,102,241,0.05) 1px, transparent 1px)
+          linear-gradient(to right, rgba(236,72,153,0.08) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(236,72,153,0.08) 1px, transparent 1px)
         `,
         backgroundSize: '60px 60px',
       }} />
 
       {/* Glows */}
-      <div className="absolute w-[500px] h-[500px] bg-indigo-500/15 rounded-full blur-3xl -top-32 -left-32 animate-pulse" style={{ animationDuration: '8s' }} />
-      <div className="absolute w-[400px] h-[400px] bg-purple-500/12 rounded-full blur-3xl top-20 right-10 animate-pulse" style={{ animationDelay: '2s', animationDuration: '10s' }} />
+      <div className="absolute w-[500px] h-[500px] bg-pink-400/20 rounded-full blur-3xl -top-32 -left-32 animate-pulse" style={{ animationDuration: '8s' }} />
+      <div className="absolute w-[400px] h-[400px] bg-purple-400/25 rounded-full blur-3xl top-20 right-10 animate-pulse" style={{ animationDelay: '2s', animationDuration: '10s' }} />
 
       <div className="relative z-10 w-full max-w-md">
         {/* Titre */}
@@ -157,7 +157,7 @@ export const AuthScreen: React.FC = () => {
                     value={displayName}
                     onChange={(e) => setDisplayName(e.target.value)}
                     placeholder="Votre nom"
-                    className="w-full pl-11 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+                    className="w-full pl-11 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500/50"
                     required={!isLogin}
                   />
                 </div>
@@ -175,7 +175,7 @@ export const AuthScreen: React.FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="votre@email.com"
-                  className="w-full pl-11 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+                  className="w-full pl-11 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500/50"
                   required
                 />
               </div>
@@ -192,7 +192,7 @@ export const AuthScreen: React.FC = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-11 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+                  className="w-full pl-11 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500/50"
                   required
                   minLength={6}
                 />
@@ -204,8 +204,8 @@ export const AuthScreen: React.FC = () => {
               disabled={loading}
               className="w-full p-4 rounded-xl font-semibold text-white transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
               style={{
-                background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
-                boxShadow: '0 4px 15px rgba(99, 102, 241, 0.3)',
+                background: 'linear-gradient(135deg, #ec4899 0%, #db2777 100%)',
+                boxShadow: '0 4px 15px rgba(236, 72, 153, 0.4)',
               }}
             >
               {loading ? 'Chargement...' : (isLogin ? (

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Play, RefreshCw, Settings, BookOpen, Save, Heart, Coins, Info, LogOut } from 'lucide-react';
+import { Play, RefreshCw, Settings, BookOpen, Save, Heart, Coins, Info, LogOut, Users, Sparkles } from 'lucide-react';
 import { useGameStore } from '../store/gameStore';
 import { AudioManager } from '../utils/audio';
 import { AuthService } from '../services/authService';
+import { CloudSaveManager } from '../components/CloudSaveManager';
 
 export const MainMenu: React.FC = () => {
   const startGame = useGameStore((s) => s.startGame);
@@ -14,6 +15,8 @@ export const MainMenu: React.FC = () => {
   const hasSave = useGameStore((state) => !!state.playerName);
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
+  const [showCloudSaves, setShowCloudSaves] = useState(false);
 
   useEffect(() => {
     AudioManager.playMusic();
@@ -51,8 +54,8 @@ export const MainMenu: React.FC = () => {
           minHeight: isPrimary ? '70px' : '60px',
           borderRadius: isPrimary ? '20px' : '16px',
           background: isPrimary 
-            ? (isHovered ? 'linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%)' : 'linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%)')
-            : (isHovered ? 'rgba(255, 255, 255, 0.28)' : 'rgba(255, 255, 255, 0.18)'),
+            ? (isHovered ? 'linear-gradient(135deg, #ec4899 0%, #db2777 100%)' : 'linear-gradient(135deg, #f472b6 0%, #ec4899 100%)')
+            : (isHovered ? 'rgba(255, 255, 255, 0.35)' : 'rgba(255, 255, 255, 0.22)'),
           border: isPrimary ? '2px solid rgba(255, 255, 255, 0.35)' : '2px solid rgba(255, 255, 255, 0.35)',
           boxShadow: isHovered 
             ? (isPrimary ? '0 8px 30px rgba(0, 0, 0, 0.2)' : '0 6px 24px rgba(15, 23, 42, 0.35)')
@@ -63,13 +66,13 @@ export const MainMenu: React.FC = () => {
         <div className="relative flex items-center justify-center gap-3 h-full py-4 px-6">
           <Icon 
             size={isPrimary ? 24 : 20} 
-            className={`${isPrimary ? 'text-gray-800' : 'text-white'} transition-transform duration-200`} 
+            className="text-white transition-transform duration-200" 
             style={{
               transform: isHovered ? 'scale(1.1)' : 'scale(1)',
             }}
           />
           <span 
-            className={`${isPrimary ? 'text-gray-800' : 'text-white'} font-bold transition-all duration-200 ${isPrimary ? 'text-xl' : 'text-lg'}`}
+            className={`text-white font-bold transition-all duration-200 ${isPrimary ? 'text-xl' : 'text-lg'}`}
             style={{
               transform: isHovered ? 'scale(1.02)' : 'scale(1)',
             }}
@@ -85,7 +88,7 @@ export const MainMenu: React.FC = () => {
     <div 
       className="w-full h-full flex items-center justify-center p-8 overflow-hidden relative"
       style={{
-        background: 'linear-gradient(135deg, #1f2937 0%, #111827 50%, #0f172a 100%)',
+        background: 'linear-gradient(135deg, #3b0764 0%, #701a75 30%, #be185d 60%, #db2777 100%)',
       }}
     >
       {/* Pattern géométrique en arrière-plan */}
@@ -98,13 +101,13 @@ export const MainMenu: React.FC = () => {
       }} />
 
       {/* Overlay doux */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-slate-900/30 to-purple-900/40" />
+      <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-purple-900/20 to-pink-900/30" />
 
-      {/* Effets lumineux subtils */}
+      {/* Effets lumineux gaming */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute w-[500px] h-[500px] bg-indigo-500/15 rounded-full blur-3xl -top-32 -left-32 animate-pulse" style={{ animationDuration: '8s' }} />
-        <div className="absolute w-[400px] h-[400px] bg-purple-500/12 rounded-full blur-3xl top-20 right-10 animate-pulse" style={{ animationDelay: '2s', animationDuration: '10s' }} />
-        <div className="absolute w-[600px] h-[600px] bg-rose-500/12 rounded-full blur-3xl -bottom-40 left-1/3 animate-pulse" style={{ animationDelay: '4s', animationDuration: '12s' }} />
+        <div className="absolute w-[500px] h-[500px] bg-pink-400/20 rounded-full blur-3xl -top-32 -left-32 animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute w-[400px] h-[400px] bg-purple-400/25 rounded-full blur-3xl top-20 right-10 animate-pulse" style={{ animationDelay: '2s', animationDuration: '10s' }} />
+        <div className="absolute w-[600px] h-[600px] bg-fuchsia-400/20 rounded-full blur-3xl -bottom-40 left-1/3 animate-pulse" style={{ animationDelay: '4s', animationDuration: '12s' }} />
       </div>
       
       {/* Contenu principal */}
@@ -162,6 +165,7 @@ export const MainMenu: React.FC = () => {
 
               <button 
                 className="px-6 py-3 rounded-xl transition-all hover:scale-105 flex items-center gap-2 font-bold text-white border-2 border-white/30"
+                onClick={() => setShowAbout(true)}
                 style={{
                   background: 'rgba(255, 255, 255, 0.12)',
                   backdropFilter: 'blur(12px)',
@@ -222,7 +226,13 @@ export const MainMenu: React.FC = () => {
 
           <MenuButton
             id="load"
-            onClick={() => setSaveLoadMode('load')}
+            onClick={() => {
+              if (user) {
+                setShowCloudSaves(true);
+              } else {
+                setSaveLoadMode('load');
+              }
+            }}
             delay="350ms"
             icon={Save}
             variant="secondary"
@@ -259,6 +269,68 @@ export const MainMenu: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Modal À propos */}
+      {showAbout && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="bg-gradient-to-br from-purple-900 to-pink-900 rounded-2xl p-8 max-w-2xl w-full border-2 border-white/20 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <h2 className="text-3xl font-bold text-white mb-4">À propos de Dissonance</h2>
+            
+            <div className="space-y-4 text-white/90">
+              <p>
+                <strong className="text-pink-300">Dissonance</strong> est un visual novel romantique où vos choix façonnent votre histoire.
+              </p>
+              
+              <div className="bg-white/10 p-4 rounded-xl">
+                <h3 className="font-bold text-pink-300 mb-2 flex items-center gap-2">
+                  <Heart size={20} /> Personnages
+                </h3>
+                <p>Développez des relations avec trois personnages uniques : Mia, Alex et Julien. Chaque interaction compte !</p>
+              </div>
+
+              <div className="bg-white/10 p-4 rounded-xl">
+                <h3 className="font-bold text-pink-300 mb-2 flex items-center gap-2">
+                  <Sparkles size={20} /> Caractéristiques
+                </h3>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>Personnalisation complète de votre personnage</li>
+                  <li>Système de relations dynamique</li>
+                  <li>Sauvegardes cloud synchronisées</li>
+                  <li>Multiples fins selon vos choix</li>
+                  <li>Système de téléphone intégré</li>
+                </ul>
+              </div>
+
+              <div className="bg-white/10 p-4 rounded-xl">
+                <h3 className="font-bold text-pink-300 mb-2 flex items-center gap-2">
+                  <Users size={20} /> Communauté
+                </h3>
+                <p>Rejoignez notre communauté sur les réseaux sociaux pour ne rien manquer des nouveautés !</p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => setShowAbout(false)}
+              className="mt-6 w-full py-3 rounded-xl font-bold text-white transition-all hover:scale-105"
+              style={{
+                background: 'linear-gradient(135deg, #ec4899 0%, #db2777 100%)',
+                boxShadow: '0 4px 15px rgba(236, 72, 153, 0.3)',
+              }}
+            >
+              Fermer
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Sauvegardes Cloud */}
+      {showCloudSaves && user && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="bg-gradient-to-br from-purple-900 to-pink-900 rounded-2xl p-8 max-w-4xl w-full border-2 border-white/20 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <CloudSaveManager mode="load" onClose={() => setShowCloudSaves(false)} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

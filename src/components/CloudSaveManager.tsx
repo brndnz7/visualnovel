@@ -44,9 +44,11 @@ export const CloudSaveManager: React.FC<CloudSaveManagerProps> = ({ mode, onClos
     setError('');
     
     try {
-      const saves = await SaveService.getUserSaves(user.uid);
+      const saves = await SaveService.getAllSaves(user.uid);
+      console.log('Sauvegardes chargées:', saves);
       setCloudSaves(saves);
     } catch (err: any) {
+      console.error('Erreur lors de la récupération des sauvegardes:', err);
       setError(err.message);
     } finally {
       setLoading(false);

@@ -57,20 +57,19 @@ export class SaveService {
       const saveId = `${userId}_slot_${slotNumber}`;
       const saveRef = doc(db, this.COLLECTION_NAME, saveId);
 
-      const saveData: Omit<CloudSave, 'id'> = {
+      const saveData: any = {
         userId,
         slotNumber,
         saveName,
         gameData,
-        timestamp: new Date(),
-        episodeTitle,
-        sceneTitle
+        timestamp: Timestamp.fromDate(new Date())
       };
 
-      await setDoc(saveRef, {
-        ...saveData,
-        timestamp: Timestamp.fromDate(saveData.timestamp)
-      });
+      // Ajouter episodeTitle et sceneTitle seulement s'ils sont définis
+      if (episodeTitle) saveData.episodeTitle = episodeTitle;
+      if (sceneTitle) saveData.sceneTitle = sceneTitle;
+
+      await setDoc(saveRef, saveData);
     } catch (error) {
       console.error('Erreur lors de la sauvegarde:', error);
       throw new Error('Impossible de sauvegarder la partie');
@@ -95,8 +94,8 @@ export class SaveService {
           saveName: data.saveName,
           gameData: data.gameData,
           timestamp: data.timestamp.toDate(),
-          episodeTitle: data.episodeTitle,
-          sceneTitle: data.sceneTitle
+          episodeTitle: data.episodeTitle || '',
+          sceneTitle: data.sceneTitle || ''
         };
       }
 
@@ -108,15 +107,14 @@ export class SaveService {
   }
 
   /**
-   * Récupérer toutes les sauvegardes d'un utilisateur
+   * Récupérer toutes les sauvegardes d'un utilisateur (simple query sans index)
    */
-  static async getUserSaves(userId: string): Promise<CloudSave[]> {
+  static async getAllSaves(userId: string): Promise<CloudSave[]> {
     try {
       const savesRef = collection(db, this.COLLECTION_NAME);
       const q = query(
         savesRef, 
-        where('userId', '==', userId),
-        orderBy('timestamp', 'desc')
+        where('userId', '==', userId)
       );
       
       const querySnapshot = await getDocs(q);
@@ -131,12 +129,13 @@ export class SaveService {
           saveName: data.saveName,
           gameData: data.gameData,
           timestamp: data.timestamp.toDate(),
-          episodeTitle: data.episodeTitle,
-          sceneTitle: data.sceneTitle
+          episodeTitle: data.episodeTitle || '',
+          sceneTitle: data.sceneTitle || ''
         });
       });
 
-      return saves;
+      // Trier par slotNumber
+      return saves.sort((a, b) => a.slotNumber - b.slotNumber);
     } catch (error) {
       console.error('Erreur lors de la récupération des sauvegardes:', error);
       throw new Error('Impossible de récupérer les sauvegardes');

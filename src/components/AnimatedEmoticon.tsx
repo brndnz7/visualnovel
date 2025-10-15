@@ -16,9 +16,9 @@ export const AnimatedEmoticon: React.FC<AnimatedEmoticonProps> = ({
   const [frameIndex, setFrameIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
 
-  // Nombre de frames basé sur le dossier (la plupart ont 81-101 frames)
-  // On suppose 91 frames pour la plupart
-  const totalFrames = 91;
+  // Réduire le nombre de frames pour éviter les erreurs de chargement
+  // Les emoticons ont des frames de 000 à 080
+  const totalFrames = 81;
   const frameDuration = 50; // ms par frame
 
   useEffect(() => {
@@ -26,12 +26,16 @@ export const AnimatedEmoticon: React.FC<AnimatedEmoticonProps> = ({
 
     const interval = setInterval(() => {
       setFrameIndex((prev) => {
-        if (prev >= totalFrames - 1) {
+        const nextFrame = prev + 1;
+        if (nextFrame >= totalFrames - 1) {
           setIsPlaying(false);
-          if (onComplete) onComplete();
-          return prev;
+          // Appeler onComplete dans un setTimeout pour éviter setState pendant le render
+          if (onComplete) {
+            setTimeout(() => onComplete(), 0);
+          }
+          return totalFrames - 1;
         }
-        return prev + 1;
+        return nextFrame;
       });
     }, frameDuration);
 
@@ -45,8 +49,8 @@ export const AnimatedEmoticon: React.FC<AnimatedEmoticonProps> = ({
   };
 
   const positionClasses = {
-    topleft: 'top-4 left-4',
-    topright: 'top-4 right-4',
+    topleft: 'top-20 left-20',
+    topright: 'top-24 right-24',
     center: 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
   };
 
