@@ -16,6 +16,7 @@ import { Notification } from './components/Notification';
 import { Phone } from './components/Phone';
 import { OrientationWarning } from './components/OrientationWarning';
 import { AuthService } from './services/authService';
+import { AdSenseService } from './services/adSenseService';
 import './styles/global.css';
 
 const App: React.FC = () => {
@@ -65,6 +66,13 @@ const App: React.FC = () => {
     const interval = setInterval(rechargeEnergy, 60000); // Chaque minute
     return () => clearInterval(interval);
   }, [rechargeEnergy]);
+
+  // Initialiser Google AdSense
+  useEffect(() => {
+    const clientId = import.meta.env.VITE_ADSENSE_CLIENT_ID || 'dev-mode';
+    AdSenseService.initialize(clientId);
+    console.log('💰 Google AdSense prêt');
+  }, []);
 
   // Rendu de l'écran actuel
   const renderGameState = () => {

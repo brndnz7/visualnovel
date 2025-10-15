@@ -143,7 +143,7 @@ export const useGameStore = create<GameStoreState>()(
       relationships: { Mia: 50, Alex: 50, Julien: 50 },
       flags: {},
       coins: 100,
-      energy: 999999, // Énergie illimitée
+      energy: 10, // Énergie limitée
       lastEnergyUse: null,
       dialogueHistory: [],
       phoneConversations: [],
@@ -171,7 +171,7 @@ export const useGameStore = create<GameStoreState>()(
           relationships: { Mia: 50, Alex: 50, Julien: 50 },
           flags: {},
           coins: 100,
-          energy: 999999, // Énergie illimitée
+          energy: 10, // Énergie limitée
           dialogueHistory: [],
           phoneConversations: [],
         });
@@ -367,7 +367,7 @@ export const useGameStore = create<GameStoreState>()(
           currentSceneId: storyData.start,
           relationships: { Mia: 50, Alex: 50, Julien: 50 },
           flags: {},
-          energy: 999999, // Énergie illimitée
+          energy: 10, // Énergie limitée
           lastEnergyUse: null,
           dialogueHistory: [],
           isSkipMode: false,

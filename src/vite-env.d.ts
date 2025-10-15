@@ -7,8 +7,7 @@ interface ImportMetaEnv {
   readonly VITE_FIREBASE_STORAGE_BUCKET: string
   readonly VITE_FIREBASE_MESSAGING_SENDER_ID: string
   readonly VITE_FIREBASE_APP_ID: string
-  readonly VITE_UNITY_GAME_ID?: string
-  readonly VITE_UNITY_TEST_MODE?: string
+  readonly VITE_ADSENSE_CLIENT_ID?: string
 }
 
 interface ImportMeta {

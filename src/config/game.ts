@@ -1,7 +1,7 @@
 // Configuration globale du jeu
 export const GAME_CONFIG = {
   VERSION: '1.0.0',
-  ENERGY_MAX: 999999, // Énergie illimitée
+  ENERGY_MAX: 10, // Énergie limitée pour inciter aux pubs
   ENERGY_RECHARGE_MINUTES: 10,
   DEFAULT_TEXT_SPEED: 30,
   DEFAULT_MUSIC_VOLUME: 0.2,

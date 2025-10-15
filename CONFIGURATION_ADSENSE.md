@@ -19,7 +19,7 @@ Google AdSense = **Publicités qui fonctionnent en hébergement solo** (Firebase
 
 ### **1. Créer un compte Google AdSense (GRATUIT)**
 
-1. Va sur https://www.google. com/adsense/
+1. Va sur https://www.google.com/adsense/
 2. Clique sur "Commencer"
 3. Connecte-toi avec ton compte Google
 4. Remplis les infos :
@@ -207,3 +207,4 @@ VITE_ADSENSE_CLIENT_ID=ca-pub-XXXXXXXXXXXXXXXX
 
 **Développé avec 💖 par l'équipe Dissonance**  
 **Version 0.1.0 - Octobre 2025**
+
