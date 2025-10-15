@@ -133,7 +133,7 @@ export const useGameStore = create<GameStoreState>()(
     (set, get) => ({
       // État initial
       user: null,
-      gameState: 'Auth',
+      gameState: 'Landing',
       navigationStack: [],
       saveLoadMode: 'save',
       playerName: '',
