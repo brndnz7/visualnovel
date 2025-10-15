@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Play, RefreshCw, Settings, BookOpen, Save, Heart, Coins, Info } from 'lucide-react';
+import { Play, RefreshCw, Settings, BookOpen, Save, Heart, Coins, Info, LogOut } from 'lucide-react';
 import { useGameStore } from '../store/gameStore';
 import { AudioManager } from '../utils/audio';
+import { AuthService } from '../services/authService';
 
 export const MainMenu: React.FC = () => {
   const startGame = useGameStore((s) => s.startGame);
   const continueGame = useGameStore((s) => s.continueGame);
   const setGameState = useGameStore((s) => s.setGameState);
   const setSaveLoadMode = useGameStore((s) => s.setSaveLoadMode);
+  const user = useGameStore((s) => s.user);
+  const signOut = useGameStore((s) => s.signOut);
   const hasSave = useGameStore((state) => !!state.playerName);
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -167,7 +170,31 @@ export const MainMenu: React.FC = () => {
                 <Info size={20} />
                 <span>À propos</span>
               </button>
+
+              {user && (
+                <button 
+                  className="px-6 py-3 rounded-xl transition-all hover:scale-105 flex items-center gap-2 font-bold text-white border-2 border-red-400/40"
+                  onClick={async () => {
+                    await AuthService.signOut();
+                    signOut();
+                  }}
+                  style={{
+                    background: 'rgba(239, 68, 68, 0.15)',
+                    backdropFilter: 'blur(12px)',
+                  }}
+                >
+                  <LogOut size={20} />
+                  <span>Déconnexion</span>
+                </button>
+              )}
             </div>
+
+            {user && (
+              <div className="mt-6 px-4 py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20">
+                <p className="text-sm text-white/70">Connecté en tant que</p>
+                <p className="text-white font-semibold">{user.displayName}</p>
+              </div>
+            )}
           </div>
         </div>
 

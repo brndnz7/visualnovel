@@ -1,5 +1,6 @@
 // Système de chargement d'épisodes
 import episode3 from './episodes/episode3.json';
+import episode4 from './episodes/episode4.json';
 import storyData from './story.json';
 
 export interface Episode {
@@ -18,10 +19,14 @@ export function getAllScenes() {
   // Épisode 3
   const episode3Scenes = episode3.scenes;
   
+  // Épisode 4
+  const episode4Scenes = episode4.scenes;
+  
   // Combiner tous les épisodes
   return {
     ...episode1And2Scenes,
     ...episode3Scenes,
+    ...episode4Scenes,
   };
 }
 
@@ -48,6 +53,13 @@ export const EPISODES = [
     startScene: episode3.startScene,
     thumbnail: '/backgrounds/school_hallway.jpg',
   },
+  {
+    id: 'episode4',
+    title: episode4.title,
+    description: episode4.description,
+    startScene: episode4.startScene,
+    thumbnail: '/backgrounds/bedroom_morning.jpg',
+  },
 ];
 
 // Fonction pour obtenir un épisode par ID
@@ -64,6 +76,8 @@ export function getEpisodeById(episodeId: string): Episode | null {
       };
     case 'episode3':
       return episode3 as Episode;
+    case 'episode4':
+      return episode4 as Episode;
     default:
       return null;
   }

@@ -16,6 +16,8 @@ import charactersData from '../data/characters.json';
 
 interface Scene {
   background: string;
+  fadeIn?: boolean;
+  fadeOut?: boolean;
   dialogues: Array<{
     speaker: string;
     text: string;
@@ -28,6 +30,8 @@ interface Scene {
     next: string;
     effects?: Record<string, number>;
     condition?: string;
+    autoAdvance?: boolean;
+    delay?: number;
   }>;
 }
 
@@ -49,6 +53,7 @@ export const GameScene: React.FC = () => {
   const [showHistory, setShowHistory] = useState(false);
   const [showPause, setShowPause] = useState(false);
   const [activeEmoticon, setActiveEmoticon] = useState<number | null>(null);
+  const [fadeOpacity, setFadeOpacity] = useState(1);
 
   // Charger toutes les scènes (épisodes 1, 2, 3)
   const allScenes = useMemo(() => getAllScenes() as unknown as Record<string, Scene>, []);
@@ -68,7 +73,13 @@ export const GameScene: React.FC = () => {
   useEffect(() => {
     setDialogueIndex(0);
     setShowChoices(false);
-  }, [currentSceneId]);
+    
+    // Effet de fondu entrant si la scène le demande
+    if (scene?.fadeIn) {
+      setFadeOpacity(0);
+      setTimeout(() => setFadeOpacity(1), 100);
+    }
+  }, [currentSceneId, scene]);
 
   // Définir les variables avant les useEffects qui les utilisent
   const activeDialogue = scene.dialogues[dialogueIndex];
@@ -117,6 +128,26 @@ export const GameScene: React.FC = () => {
       return () => clearTimeout(timer);
     }
   }, [isAutoMode, dialogueIndex, showChoices, activeDialogue, textSpeed, handleNext]);
+
+  // Auto-avancement pour les transitions entre épisodes
+  useEffect(() => {
+    if (showChoices && availableChoices.length > 0) {
+      const autoChoice = availableChoices.find(c => c.autoAdvance);
+      if (autoChoice) {
+        const delay = autoChoice.delay || 3000;
+        
+        // Fondu sortant si la scène le demande
+        if (scene?.fadeOut) {
+          setTimeout(() => setFadeOpacity(0), delay - 1000);
+        }
+        
+        const timer = setTimeout(() => {
+          makeChoice(autoChoice);
+        }, delay);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [showChoices, availableChoices, makeChoice, scene]);
 
   // Trouver tous les personnages dans la scène
   const sceneCharacters = useMemo(() => {
@@ -181,7 +212,10 @@ export const GameScene: React.FC = () => {
   }, [showChoices, availableChoices, handleNext, makeChoice, showHistory, showPause]);
 
   return (
-    <div className="w-full h-full relative overflow-hidden">
+    <div 
+      className="w-full h-full relative overflow-hidden transition-opacity duration-1000"
+      style={{ opacity: fadeOpacity }}
+    >
       <SceneBackground backgroundId={scene.background} />
 
       {/* Logique d'affichage des personnages */}
@@ -280,9 +314,11 @@ export const GameScene: React.FC = () => {
       ) : (
         <div className="absolute inset-0 flex items-center justify-center z-10">
           <div className="flex flex-col gap-4 w-full max-w-md p-4">
-            {availableChoices.map((choice, i) => (
-              <ChoiceButton key={i} index={i} choice={choice} onChoice={makeChoice} />
-            ))}
+            {availableChoices
+              .filter(choice => !choice.autoAdvance) // Ne pas afficher les choix auto
+              .map((choice, i) => (
+                <ChoiceButton key={i} index={i} choice={choice} onChoice={makeChoice} />
+              ))}
           </div>
         </div>
       )}

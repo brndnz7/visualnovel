@@ -1,0 +1,512 @@
+{
+  "id": "episode4",
+  "title": "Révélations",
+  "description": "La vérité derrière vos visions se dévoile enfin",
+  "startScene": "ep4_scene1_matin",
+  "scenes": {
+    "ep4_scene1_matin": {
+      "background": "bedroom_morning",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Les premiers rayons du soleil traversent votre fenêtre. Vous n'avez presque pas dormi. Les questions tournent encore et encore dans votre tête."
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Je ne peux pas continuer comme ça. Je dois comprendre ce qui m'arrive.",
+          "emoticon": "tired"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Votre téléphone vibre. Un message de {partner} : 'Salut {playerName}. J'ai réfléchi à ce que tu m'as dit hier. Je pense que je connais quelqu'un qui pourrait nous aider. Rendez-vous au café à 10h ?'"
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Quelqu'un qui pourrait m'aider ? Je me demande de qui il/elle parle..."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer...",
+          "next": "ep4_scene2_cafe"
+        }
+      ]
+    },
+    "ep4_scene2_cafe": {
+      "background": "cafe",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Vous entrez dans le café. {partner} est déjà là, accompagné(e) d'une personne que vous n'avez jamais vue auparavant."
+        },
+        {
+          "speaker": "{partner}",
+          "text": "{playerName}, voici le Dr. Kaori Tanaka. Elle enseigne la psychologie paranormale à l'université. C'est... une spécialiste.",
+          "expression": "neutral",
+          "position": "right"
+        },
+        {
+          "speaker": "Dr. Tanaka",
+          "text": "Enchanté, {playerName}. Votre partenaire m'a expliqué votre situation. Des visions précognitives, c'est bien ça ?",
+          "position": "left",
+          "expression": "neutral"
+        },
+        {
+          "speaker": "Player",
+          "text": "Je... oui. Mais je ne sais pas si c'est vraiment ça. Peut-être que je deviens fou/folle."
+        },
+        {
+          "speaker": "Dr. Tanaka",
+          "text": "Vous n'êtes pas fou/folle. Ce que vous vivez est rare, mais documenté. J'ai étudié des cas similaires pendant des années.",
+          "position": "left",
+          "expression": "happy"
+        },
+        {
+          "speaker": "Dr. Tanaka",
+          "text": "Mais avant d'aller plus loin, laissez-moi vous poser une question : avez-vous remarqué des fils de lumière reliant certaines personnes ?",
+          "position": "left",
+          "expression": "neutral"
+        },
+        {
+          "speaker": "Player",
+          "text": "Quoi ?! Comment... comment vous savez ça ?!",
+          "emoticon": "shocked"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer...",
+          "next": "ep4_scene3_explication"
+        }
+      ]
+    },
+    "ep4_scene3_explication": {
+      "background": "cafe",
+      "dialogues": [
+        {
+          "speaker": "Dr. Tanaka",
+          "text": "Parce que c'est un symptôme classique de ce que nous appelons le 'Syndrome d'Empathie Augmentée'. Vous êtes ce qu'on appelle un 'Lecteur'.",
+          "position": "left",
+          "expression": "neutral"
+        },
+        {
+          "speaker": "Player",
+          "text": "Un... Lecteur ?"
+        },
+        {
+          "speaker": "Dr. Tanaka",
+          "text": "Certaines personnes naissent avec la capacité de percevoir les liens émotionnels entre les êtres. Ces 'fils de lumière' que vous voyez représentent les connexions affectives.",
+          "position": "left",
+          "expression": "happy"
+        },
+        {
+          "speaker": "Dr. Tanaka",
+          "text": "Rouge pour la passion, or pour la joie, argent pour la confiance... Chaque couleur a une signification. Et dans des moments d'émotion intense, vous pouvez même percevoir le futur immédiat.",
+          "position": "left",
+          "expression": "neutral"
+        },
+        {
+          "speaker": "{partner}",
+          "text": "Attends... Tu veux dire que {playerName} peut littéralement voir nos émotions ?",
+          "expression": "surprised",
+          "position": "right"
+        },
+        {
+          "speaker": "Dr. Tanaka",
+          "text": "Exactement. C'est à la fois un don et un fardeau. La plupart des Lecteurs ont du mal à gérer cette surcharge sensorielle.",
+          "position": "left",
+          "expression": "sad"
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Tout commence à avoir un sens. Les visions, les fils de lumière, cette sensation d'être constamment submergé(e) par les émotions des autres..."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Pourquoi ça m'arrive maintenant ? Je n'ai jamais eu ça avant.",
+          "next": "ep4_scene4_declenchement"
+        }
+      ]
+    },
+    "ep4_scene4_declenchement": {
+      "background": "cafe",
+      "dialogues": [
+        {
+          "speaker": "Dr. Tanaka",
+          "text": "Le don se manifeste généralement à la fin de l'adolescence, début de l'âge adulte. Il est souvent déclenché par un changement majeur dans la vie.",
+          "position": "left",
+          "expression": "neutral"
+        },
+        {
+          "speaker": "Player",
+          "text": "L'université... Mon arrivée ici a tout déclenché."
+        },
+        {
+          "speaker": "Dr. Tanaka",
+          "text": "Précisément. Un nouveau lieu, de nouvelles personnes, de nouvelles émotions intenses. Votre cerveau s'est 'réveillé'.",
+          "position": "left",
+          "expression": "happy"
+        },
+        {
+          "speaker": "{partner}",
+          "text": "Mais... c'est dangereux ? {playerName} va aller bien ?",
+          "expression": "sad",
+          "position": "right"
+        },
+        {
+          "speaker": "Dr. Tanaka",
+          "text": "Avec de l'entraînement, {playerName} apprendra à contrôler ce don. À filtrer les émotions, à choisir quand regarder et quand fermer les yeux.",
+          "position": "left",
+          "expression": "happy"
+        },
+        {
+          "speaker": "Dr. Tanaka",
+          "text": "Si vous le souhaitez, je peux vous enseigner. Mais je dois vous prévenir : une fois que vous saurez vraiment 'voir', il n'y a pas de retour en arrière.",
+          "position": "left",
+          "expression": "neutral"
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] C'est une décision énorme. Mais honnêtement, ai-je vraiment le choix ?"
+        }
+      ],
+      "choices": [
+        {
+          "text": "J'accepte. Je veux apprendre à maîtriser ça.",
+          "next": "ep4_scene5_acceptation",
+          "effects": { "confidence": 10 }
+        },
+        {
+          "text": "J'ai besoin de temps pour réfléchir à tout ça.",
+          "next": "ep4_scene5_hesitation",
+          "effects": { "confidence": -5 }
+        }
+      ]
+    },
+    "ep4_scene5_acceptation": {
+      "background": "cafe",
+      "dialogues": [
+        {
+          "speaker": "Dr. Tanaka",
+          "text": "C'est une sage décision. Nous commencerons dès demain. Préparez-vous, {playerName}. Votre vie ne sera plus jamais la même.",
+          "position": "left",
+          "expression": "happy"
+        },
+        {
+          "speaker": "{partner}",
+          "text": "Je serai là pour toi, {playerName}. Peu importe ce qui arrive.",
+          "expression": "love",
+          "position": "right"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "En regardant {partner}, vous voyez le fil qui vous relie. Cette fois, vous ne détournez pas le regard. Vous l'acceptez."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer...",
+          "next": "ep4_scene6_entrainement"
+        }
+      ]
+    },
+    "ep4_scene5_hesitation": {
+      "background": "cafe",
+      "dialogues": [
+        {
+          "speaker": "Dr. Tanaka",
+          "text": "Je comprends. C'est beaucoup à assimiler. Mais n'attendez pas trop longtemps. Plus vous résisterez, plus ce sera difficile.",
+          "position": "left",
+          "expression": "neutral"
+        },
+        {
+          "speaker": "{partner}",
+          "text": "Prends ton temps, {playerName}. Je suis là.",
+          "expression": "neutral",
+          "position": "right"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Vous quittez le café avec plus de questions que de réponses. Mais au moins, vous n'êtes plus seul(e)."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer...",
+          "next": "ep4_scene6_entrainement"
+        }
+      ]
+    },
+    "ep4_scene6_entrainement": {
+      "background": "library",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Les jours suivants passent dans un brouillard d'entraînement. Dr. Tanaka vous apprend à méditer, à vous centrer, à filtrer le bruit émotionnel constant."
+        },
+        {
+          "speaker": "Dr. Tanaka",
+          "text": "Concentrez-vous. Respirez. Les émotions ne sont pas vous. Vous êtes simplement le témoin.",
+          "position": "left",
+          "expression": "neutral"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Petit à petit, vous apprenez. Les visions deviennent moins chaotiques. Les fils de lumière, plus clairs."
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Je commence à comprendre. Ce n'est pas une malédiction. C'est juste... une autre façon de voir le monde.",
+          "emoticon": "happy"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer...",
+          "next": "ep4_scene7_revelation_partner"
+        }
+      ]
+    },
+    "ep4_scene7_revelation_partner": {
+      "background": "park",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Un soir, après une session particulièrement intense, vous vous promenez avec {partner} dans le parc."
+        },
+        {
+          "speaker": "{partner}",
+          "text": "Tu as l'air mieux. Plus... serein(e).",
+          "expression": "happy",
+          "position": "right"
+        },
+        {
+          "speaker": "Player",
+          "text": "Je le suis. Grâce à toi. Tu ne m'as jamais jugé(e). Tu m'as juste... cru."
+        },
+        {
+          "speaker": "{partner}",
+          "text": "Bien sûr que je t'ai cru. Je... {playerName}, il y a quelque chose que je veux te dire depuis un moment.",
+          "expression": "love",
+          "position": "right"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Le fil qui vous relie commence à briller intensément. Vous savez ce qui va suivre."
+        },
+        {
+          "speaker": "{partner}",
+          "text": "Depuis qu'on s'est rencontrés, je... Je crois que je ressens plus que de l'amitié pour toi.",
+          "expression": "love",
+          "position": "right"
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Mon cœur bat si fort. Le fil entre nous est d'un or éclatant. C'est magnifique.",
+          "emoticon": "love"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Je ressens la même chose. Depuis le début.",
+          "next": "ep4_scene8_confession_positive",
+          "effects": { "{partner}": 30 }
+        },
+        {
+          "text": "Je... j'ai besoin de temps. C'est compliqué.",
+          "next": "ep4_scene8_confession_hesitante",
+          "effects": { "{partner}": -10 }
+        },
+        {
+          "text": "Je t'apprécie énormément, mais... je ne suis pas sûr(e) de mes sentiments.",
+          "next": "ep4_scene8_confession_refus",
+          "effects": { "{partner}": -20 }
+        }
+      ]
+    },
+    "ep4_scene8_confession_positive": {
+      "background": "park",
+      "dialogues": [
+        {
+          "speaker": "{partner}",
+          "text": "Vraiment ? Tu... tu es sérieux/sérieuse ?",
+          "expression": "love",
+          "position": "right"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Le monde semble s'arrêter. Le fil entre vous pulse comme un cœur vivant."
+        },
+        {
+          "speaker": "{partner}",
+          "text": "Je suis tellement heureux/heureuse. Je... je ne sais même pas quoi dire.",
+          "expression": "love",
+          "position": "right"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "{partner} s'approche doucement. Vous sentez son souffle chaud. Et puis, tendrement, vos lèvres se rencontrent."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "À cet instant, vous voyez tout. Le passé, le présent, et des dizaines de futurs possibles qui s'étirent devant vous comme des fils dorés."
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] C'est donc ça, l'amour. Pas seulement un sentiment, mais une connexion qui transcende le temps.",
+          "emoticon": "love"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer...",
+          "next": "ep4_scene9_epilogue"
+        }
+      ]
+    },
+    "ep4_scene8_confession_hesitante": {
+      "background": "park",
+      "dialogues": [
+        {
+          "speaker": "{partner}",
+          "text": "Je comprends. C'est... c'est déjà beaucoup avec ton don. Je ne veux pas t'ajouter de la pression.",
+          "expression": "sad",
+          "position": "right"
+        },
+        {
+          "speaker": "Player",
+          "text": "Ce n'est pas ça. J'ai juste besoin de démêler mes propres émotions de celles que je perçois autour de moi."
+        },
+        {
+          "speaker": "{partner}",
+          "text": "Je t'attendrai. Le temps qu'il faudra.",
+          "expression": "neutral",
+          "position": "right"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Le fil entre vous vacille légèrement, mais ne se brise pas. Il y a de l'espoir."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer...",
+          "next": "ep4_scene9_epilogue"
+        }
+      ]
+    },
+    "ep4_scene8_confession_refus": {
+      "background": "park",
+      "dialogues": [
+        {
+          "speaker": "{partner}",
+          "text": "Oh. Je... je vois.",
+          "expression": "sad",
+          "position": "right"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Le fil entre vous change de couleur, passant de l'or au gris argenté. Il n'est pas brisé, mais il est différent maintenant."
+        },
+        {
+          "speaker": "{partner}",
+          "text": "Merci d'être honnête avec moi. Ça... ça me fait mal, mais je préfère la vérité.",
+          "expression": "neutral",
+          "position": "right"
+        },
+        {
+          "speaker": "Player",
+          "text": "Je suis désolé(e). Tu es important(e) pour moi, juste... différemment."
+        },
+        {
+          "speaker": "{partner}",
+          "text": "Je comprends. On... on peut rester amis ?",
+          "expression": "sad",
+          "position": "right"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer...",
+          "next": "ep4_scene9_epilogue"
+        }
+      ]
+    },
+    "ep4_scene9_epilogue": {
+      "background": "school_entrance",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Les semaines qui suivent voient une transformation complète. Vous maîtrisez de mieux en mieux votre don."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Vous apprenez à vivre avec les fils de lumière, à lire les émotions sans vous y perdre, à accepter les visions comme des murmures plutôt que des cris."
+        },
+        {
+          "speaker": "Dr. Tanaka",
+          "text": "Vous avez fait des progrès remarquables, {playerName}. Je suis fière de vous.",
+          "position": "left",
+          "expression": "happy"
+        },
+        {
+          "speaker": "Player",
+          "text": "Merci, Docteur. Pour tout."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "En regardant autour de vous, vous voyez le campus sous un nouveau jour. Les fils de lumière tissent un réseau complexe et magnifique entre tous les étudiants."
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] Nous sommes tous connectés. Chaque choix, chaque émotion crée des ondulations qui touchent les autres.",
+          "emoticon": "thinking"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Au loin, vous apercevez Mia, Alex et Julien qui discutent ensemble. Même si vous n'avez pas choisi tous les chemins, ils font toujours partie de votre vie."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Et soudain, une vision frappe. Claire comme du cristal. L'université dans six mois. Un événement qui changera tout. Quelque chose d'énorme approche."
+        },
+        {
+          "speaker": "Player",
+          "text": "[Pensée] L'histoire ne fait que commencer. Et cette fois, je suis prêt(e).",
+          "emoticon": "confident"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Fin de l'Épisode 4",
+          "next": "end_episode_4"
+        }
+      ]
+    },
+    "end_episode_4": {
+      "background": "black",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Épisode 4 : Révélations - Terminé"
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Merci d'avoir suivi l'aventure de {playerName}."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "L'histoire continue..."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Retour au menu",
+          "next": "main_menu"
+        }
+      ]
+    }
+  }
+}
+

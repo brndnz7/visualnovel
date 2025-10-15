@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Play, Save, Settings, Home } from 'lucide-react';
 import { useGameStore } from '../store/gameStore';
+import { CloudSaveManager } from './CloudSaveManager';
 
 interface PauseMenuProps {
   onClose: () => void;
@@ -8,8 +9,9 @@ interface PauseMenuProps {
 
 export const PauseMenu: React.FC<PauseMenuProps> = ({ onClose }) => {
   const setGameState = useGameStore((s) => s.setGameState);
-  const setSaveLoadMode = useGameStore((s) => s.setSaveLoadMode);
+  const user = useGameStore((s) => s.user);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [showSaveManager, setShowSaveManager] = useState(false);
 
   const handleReturnToMenu = () => {
     setShowConfirm(true);
@@ -20,8 +22,11 @@ export const PauseMenu: React.FC<PauseMenuProps> = ({ onClose }) => {
   };
 
   const handleSave = () => {
-    setSaveLoadMode('save');
-    onClose();
+    if (user) {
+      setShowSaveManager(true);
+    } else {
+      useGameStore.getState().showNotification('Connectez-vous pour sauvegarder en ligne', 'warning');
+    }
   };
 
   const handleSettings = () => {
@@ -136,6 +141,10 @@ export const PauseMenu: React.FC<PauseMenuProps> = ({ onClose }) => {
         </div>
       </div>
     );
+  }
+
+  if (showSaveManager) {
+    return <CloudSaveManager mode="save" onClose={() => { setShowSaveManager(false); onClose(); }} />;
   }
 
   return (

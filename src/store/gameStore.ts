@@ -7,6 +7,14 @@ import { PhoneConversation, PhoneMessage } from '../types/phone';
 import charactersData from '../data/characters.json';
 import storyData from '../data/story.json';
 
+// Type pour l'utilisateur
+export interface User {
+  uid: string;
+  email: string;
+  displayName: string;
+  photoURL?: string;
+}
+
 // Types pour le store
 interface Dialogue {
   speaker: string;
@@ -23,6 +31,9 @@ interface Choice {
 }
 
 interface GameStoreState {
+  // Authentification
+  user: User | null;
+  
   // État du jeu
   gameState: GameState;
   navigationStack: GameState[];
@@ -65,6 +76,8 @@ interface GameStoreState {
   };
   
   // Actions
+  setUser: (user: User | null) => void;
+  signOut: () => void;
   setGameState: (newState: GameState) => void;
   goBack: () => void;
   setSaveLoadMode: (mode: 'save' | 'load') => void;
@@ -116,7 +129,8 @@ export const useGameStore = create<GameStoreState>()(
   persist(
     (set, get) => ({
       // État initial
-      gameState: 'MainMenu',
+      user: null,
+      gameState: 'Auth',
       navigationStack: [],
       saveLoadMode: 'save',
       playerName: '',
@@ -143,6 +157,23 @@ export const useGameStore = create<GameStoreState>()(
       },
 
       // Actions
+      setUser: (user) => set({ user }),
+      
+      signOut: () => {
+        set({ 
+          user: null,
+          gameState: 'Auth',
+          playerName: '',
+          currentSceneId: storyData.start,
+          relationships: { Mia: 50, Alex: 50, Julien: 50 },
+          flags: {},
+          coins: 100,
+          energy: GAME_CONFIG.ENERGY_MAX,
+          dialogueHistory: [],
+          phoneConversations: [],
+        });
+      },
+      
       setGameState: (newState) => {
         if (newState === 'Playing') {
           AudioManager.play('swoosh');

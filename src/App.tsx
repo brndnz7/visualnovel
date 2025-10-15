@@ -1,5 +1,6 @@
 import React, { useEffect, Suspense } from 'react';
 import { useGameStore } from './store/gameStore';
+import { AuthScreen } from './screens/AuthScreen';
 import { MainMenu } from './screens/MainMenu';
 import { NamingScreen } from './screens/NamingScreen';
 import { CustomizationScreen } from './screens/CustomizationScreen';
@@ -13,6 +14,7 @@ import { SaveLoadScreen } from './screens/SaveLoadScreen';
 import { Notification } from './components/Notification';
 import { Phone } from './components/Phone';
 import { OrientationWarning } from './components/OrientationWarning';
+import { AuthService } from './services/authService';
 import './styles/global.css';
 
 const App: React.FC = () => {
@@ -23,6 +25,34 @@ const App: React.FC = () => {
   const showPhone = useGameStore((state) => state.showPhone);
   const activePhoneConversation = useGameStore((state) => state.activePhoneConversation);
   const closePhone = useGameStore((state) => state.closePhone);
+  const setUser = useGameStore((state) => state.setUser);
+  const setGameState = useGameStore((state) => state.setGameState);
+
+  // Observer l'état d'authentification
+  useEffect(() => {
+    const unsubscribe = AuthService.onAuthStateChange((user) => {
+      if (user) {
+        setUser({
+          uid: user.uid,
+          email: user.email || '',
+          displayName: user.displayName || 'Joueur',
+          photoURL: user.photoURL || undefined
+        });
+        // Si on est sur l'écran d'auth et qu'un utilisateur se connecte, aller au menu
+        if (gameState === 'Auth') {
+          setGameState('MainMenu');
+        }
+      } else {
+        setUser(null);
+        // Si l'utilisateur se déconnecte, retourner à l'écran d'auth
+        if (gameState !== 'Auth') {
+          setGameState('Auth');
+        }
+      }
+    });
+
+    return () => unsubscribe();
+  }, [setUser, gameState, setGameState]);
 
   // Appliquer le thème
   useEffect(() => {
@@ -38,6 +68,8 @@ const App: React.FC = () => {
   // Rendu de l'écran actuel
   const renderGameState = () => {
     switch (gameState) {
+      case 'Auth':
+        return <AuthScreen />;
       case 'Naming':
         return <NamingScreen />;
       case 'Customization':

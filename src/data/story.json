@@ -398,8 +398,10 @@
       ],
       "choices": [
         {
-          "text": "Continuer vers l'Épisode 2",
-          "next": "ep2_scene_1_annonce"
+          "text": "",
+          "next": "transition_ep1_to_ep2",
+          "autoAdvance": true,
+          "delay": 2000
         }
       ]
     },
@@ -433,8 +435,10 @@
       ],
       "choices": [
         {
-          "text": "Continuer vers l'Épisode 2",
-          "next": "ep2_scene_1_annonce"
+          "text": "",
+          "next": "transition_ep1_to_ep2",
+          "autoAdvance": true,
+          "delay": 2000
         }
       ]
     },
@@ -468,8 +472,10 @@
       ],
       "choices": [
         {
-          "text": "Continuer vers l'Épisode 2",
-          "next": "ep2_scene_1_annonce"
+          "text": "",
+          "next": "transition_ep1_to_ep2",
+          "autoAdvance": true,
+          "delay": 2000
         }
       ]
     },
@@ -766,8 +772,48 @@
       ],
       "choices": [
         {
-          "text": "Fin de l'Épisode 2",
-          "next": "end_episode_1"
+          "text": "",
+          "next": "transition_ep2_to_ep3",
+          "autoAdvance": true,
+          "delay": 2000
+        }
+      ]
+    },
+    "transition_ep1_to_ep2": {
+      "background": "black",
+      "fadeIn": true,
+      "fadeOut": true,
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Épisode 1 : Le Projet - Terminé"
+        }
+      ],
+      "choices": [
+        {
+          "text": "",
+          "next": "ep2_scene_1_annonce",
+          "autoAdvance": true,
+          "delay": 3000
+        }
+      ]
+    },
+    "transition_ep2_to_ep3": {
+      "background": "black",
+      "fadeIn": true,
+      "fadeOut": true,
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Épisode 2 : Le Festival des Étoiles Filantes - Terminé"
+        }
+      ],
+      "choices": [
+        {
+          "text": "",
+          "next": "ep3_scene1_fissures",
+          "autoAdvance": true,
+          "delay": 3000
         }
       ]
     },

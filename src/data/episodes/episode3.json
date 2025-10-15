@@ -464,20 +464,20 @@
     },
     "end_episode_3": {
       "background": "black",
+      "fadeIn": true,
+      "fadeOut": true,
       "dialogues": [
         {
           "speaker": "Narrator",
           "text": "Épisode 3 : Les Murmures Croissants - Terminé"
-        },
-        {
-          "speaker": "Narrator",
-          "text": "À suivre..."
         }
       ],
       "choices": [
         {
-          "text": "Retour au menu",
-          "next": "main_menu"
+          "text": "",
+          "next": "ep4_scene1_matin",
+          "autoAdvance": true,
+          "delay": 3000
         }
       ]
     }

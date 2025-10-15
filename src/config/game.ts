@@ -10,7 +10,7 @@ export const GAME_CONFIG = {
 
 export const LOCAL_STORAGE_KEY = `sweetDestinySave_${GAME_CONFIG.VERSION}`;
 
-export type GameState = 'MainMenu' | 'Naming' | 'Customization' | 'GenderSelection' | 'CharacterCreator' | 'Playing' | 'Settings' | 'Shop' | 'ChapterSelect' | 'SaveLoad';
+export type GameState = 'Auth' | 'MainMenu' | 'Naming' | 'Customization' | 'GenderSelection' | 'CharacterCreator' | 'Playing' | 'Settings' | 'Shop' | 'ChapterSelect' | 'SaveLoad';
 export type NotificationType = 'info' | 'success' | 'warning' | 'error';
 export type CharacterExpression = 'neutral' | 'happy' | 'sad' | 'angry' | 'surprised' | 'love';
 
