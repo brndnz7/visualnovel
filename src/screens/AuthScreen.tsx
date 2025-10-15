@@ -67,6 +67,8 @@ export const AuthScreen: React.FC = () => {
   };
 
   const handleSkipAuth = () => {
+    // Créer un utilisateur invité temporaire
+    setUser(null);
     setGameState('MainMenu');
   };
 
