@@ -334,7 +334,7 @@ export const GameScene: React.FC = () => {
         </button>
       )}
 
-      <RelationshipHUD />
+      <RelationshipButton />
       <EnergyHUD />
       <GameControls onShowHistory={() => setShowHistory(true)} />
 
