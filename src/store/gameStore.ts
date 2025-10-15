@@ -200,21 +200,9 @@ export const useGameStore = create<GameStoreState>()(
       },
 
       goBack: () => {
-        set((state) => {
-          const newStack = [...state.navigationStack];
-          const previousState = newStack.pop();
-          
-          if (previousState) {
-            return {
-              navigationStack: newStack,
-              gameState: previousState,
-            };
-          }
-          // Si pas d'état précédent, retourner au menu
-          return {
-            navigationStack: [],
-            gameState: 'MainMenu',
-          };
+        set(() => {
+          // Toujours retourner au MainMenu depuis Settings, Shop, ChapterSelect
+          return { navigationStack: [], gameState: 'MainMenu' };
         });
       },
 

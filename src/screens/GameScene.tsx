@@ -5,7 +5,7 @@ import { SceneBackground } from '../components/SceneBackground';
 import { CharacterPortrait } from '../components/CharacterPortrait';
 import { DialogueBox } from '../components/DialogueBox';
 import { ChoiceButton } from '../components/ChoiceButton';
-import { RelationshipHUD } from '../components/RelationshipHUD';
+import { RelationshipButton } from '../components/RelationshipButton';
 import { EnergyHUD } from '../components/EnergyHUD';
 import { GameControls } from '../components/GameControls';
 import { DialogueHistory } from '../components/DialogueHistory';
