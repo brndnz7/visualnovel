@@ -174,71 +174,7 @@ export const MainMenu: React.FC = () => {
         </div>
 
         {/* Boutons d'action principaux */}
-        <div className="flex flex-col lg:flex-row gap-4 justify-center items-center mb-12">
-              <button 
-                className="px-6 py-3 rounded-xl transition-all hover:scale-105 flex items-center gap-2 font-bold text-white border-2 border-white/30"
-                onClick={() => setGameState('Shop')}
-                style={{
-                  background: 'rgba(255, 255, 255, 0.12)',
-                  backdropFilter: 'blur(12px)',
-                }}
-              >
-                <Coins size={20} />
-                <span>Boutique</span>
-              </button>
-              
-              <button 
-                className="px-6 py-3 rounded-xl transition-all hover:scale-105 flex items-center gap-2 font-bold text-white border-2 border-white/30"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.12)',
-                  backdropFilter: 'blur(12px)',
-                }}
-              >
-                <Heart size={20} />
-                <span>Soutenir</span>
-              </button>
-
-              <button 
-                className="px-6 py-3 rounded-xl transition-all hover:scale-105 flex items-center gap-2 font-bold text-white border-2 border-white/30"
-                onClick={() => setShowAbout(true)}
-                style={{
-                  background: 'rgba(255, 255, 255, 0.12)',
-                  backdropFilter: 'blur(12px)',
-                }}
-              >
-                <Info size={20} />
-                <span>À propos</span>
-              </button>
-
-              {user && (
-                <button 
-                  className="px-6 py-3 rounded-xl transition-all hover:scale-105 flex items-center gap-2 font-bold text-white border-2 border-red-400/40"
-                  onClick={async () => {
-                    await AuthService.signOut();
-                    signOut();
-                  }}
-                  style={{
-                    background: 'rgba(239, 68, 68, 0.15)',
-                    backdropFilter: 'blur(12px)',
-                  }}
-                >
-                  <LogOut size={20} />
-                  <span>Déconnexion</span>
-                </button>
-              )}
-            </div>
-
-            {user && (
-              <div className="mt-6 px-4 py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20">
-                <p className="text-sm text-white/70">Connecté en tant que</p>
-                <p className="text-white font-semibold">{user.displayName}</p>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Section droite - Menu boutons */}
-        <div className="w-full max-w-md space-y-5">
+        <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-8 max-w-4xl mx-auto">
           <MenuButton
             id="new-game"
             onClick={startGame}
@@ -274,34 +210,80 @@ export const MainMenu: React.FC = () => {
           >
             Charger
           </MenuButton>
+        </div>
 
-          <MenuButton
-            id="chapters"
+        {/* Boutons secondaires */}
+        <div className="flex gap-4 justify-center items-center flex-wrap mb-8">
+          <button 
+            className="px-6 py-3 rounded-xl transition-all hover:scale-105 flex items-center gap-2 font-bold text-white border-2 border-white/30"
             onClick={() => setGameState('ChapterSelect')}
-            delay="375ms"
-            icon={BookOpen}
-            variant="secondary"
+            style={{
+              background: 'rgba(255, 255, 255, 0.15)',
+              backdropFilter: 'blur(12px)',
+            }}
           >
-            Chapitres
-          </MenuButton>
+            <BookOpen size={20} />
+            <span>Chapitres</span>
+          </button>
 
-          <MenuButton
-            id="settings"
+          <button 
+            className="px-6 py-3 rounded-xl transition-all hover:scale-105 flex items-center gap-2 font-bold text-white border-2 border-white/30"
             onClick={() => setGameState('Settings')}
-            delay="400ms"
-            icon={Settings}
-            variant="secondary"
+            style={{
+              background: 'rgba(255, 255, 255, 0.15)',
+              backdropFilter: 'blur(12px)',
+            }}
           >
-            Paramètres
-          </MenuButton>
+            <Settings size={20} />
+            <span>Paramètres</span>
+          </button>
 
-          {/* Version */}
-          <div 
-            className={`mt-8 text-white/50 text-sm ${!mounted ? 'opacity-0' : 'opacity-100'}`}
-            style={{ transition: 'opacity 0.5s ease-out', transitionDelay: '800ms' }}
+          <button 
+            className="px-6 py-3 rounded-xl transition-all hover:scale-105 flex items-center gap-2 font-bold text-white border-2 border-white/30"
+            onClick={() => setGameState('Shop')}
+            style={{
+              background: 'rgba(255, 255, 255, 0.15)',
+              backdropFilter: 'blur(12px)',
+            }}
           >
-            <p>Version 1.0.0 • Sweet Destiny © 2025</p>
+            <Coins size={20} />
+            <span>Boutique</span>
+          </button>
+
+          {user && (
+            <button 
+              className="px-6 py-3 rounded-xl transition-all hover:scale-105 flex items-center gap-2 font-bold text-white border-2 border-red-400/40"
+              onClick={async () => {
+                await AuthService.signOut();
+                signOut();
+              }}
+              style={{
+                background: 'rgba(239, 68, 68, 0.15)',
+                backdropFilter: 'blur(12px)',
+              }}
+            >
+              <LogOut size={20} />
+              <span>Déconnexion</span>
+            </button>
+          )}
+        </div>
+
+        {/* Infos utilisateur */}
+        {user && (
+          <div className="text-center mb-6">
+            <div className="inline-block px-6 py-3 rounded-xl bg-white/15 backdrop-blur-md border border-white/20">
+              <p className="text-sm text-white/70">Connecté en tant que</p>
+              <p className="text-white font-semibold text-lg">{user.displayName}</p>
+            </div>
           </div>
+        )}
+
+        {/* Version */}
+        <div 
+          className={`text-center text-white/50 text-sm ${!mounted ? 'opacity-0' : 'opacity-100'}`}
+          style={{ transition: 'opacity 0.5s ease-out', transitionDelay: '800ms' }}
+        >
+          <p>Version 1.0.0 • Dissonance © 2025</p>
         </div>
       </div>
 
