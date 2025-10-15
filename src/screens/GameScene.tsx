@@ -113,6 +113,20 @@ export const GameScene: React.FC = () => {
     }
   }, [currentSceneId, dialogueIndex, scene, addToHistory]);
 
+  // Trouver tous les personnages dans la scène
+  const sceneCharacters = useMemo(() => {
+    const speakers = new Set(scene.dialogues.map((d) => d.speaker));
+    return Array.from(speakers).filter((speakerId) => charactersData[speakerId as keyof typeof charactersData]);
+  }, [scene]);
+
+  // Filtrer les choix selon les conditions
+  const availableChoices = useMemo(() => {
+    return scene.choices.filter((choice) => {
+      if (!choice.condition) return true;
+      return checkCondition(choice.condition);
+    });
+  }, [scene.choices, checkCondition]);
+
   // Mode Auto : avancer automatiquement
   useEffect(() => {
     if (isAutoMode && !showChoices && activeDialogue) {
@@ -148,20 +162,6 @@ export const GameScene: React.FC = () => {
       }
     }
   }, [showChoices, availableChoices, makeChoice, scene]);
-
-  // Trouver tous les personnages dans la scène
-  const sceneCharacters = useMemo(() => {
-    const speakers = new Set(scene.dialogues.map((d) => d.speaker));
-    return Array.from(speakers).filter((speakerId) => charactersData[speakerId as keyof typeof charactersData]);
-  }, [scene]);
-
-  // Filtrer les choix selon les conditions
-  const availableChoices = useMemo(() => {
-    return scene.choices.filter((choice) => {
-      if (!choice.condition) return true;
-      return checkCondition(choice.condition);
-    });
-  }, [scene.choices, checkCondition]);
 
   // Navigation au clavier
   useEffect(() => {

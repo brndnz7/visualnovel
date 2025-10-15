@@ -108,10 +108,10 @@ export class SaveService {
       const querySnapshot = await getDocs(q);
       const saves: CloudSave[] = [];
 
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
+      querySnapshot.forEach((docSnap) => {
+        const data = docSnap.data();
         saves.push({
-          id: doc.id,
+          id: docSnap.id,
           userId: data.userId,
           slotNumber: data.slotNumber,
           saveName: data.saveName,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Save, Download, Trash2, Cloud, HardDrive, AlertCircle } from 'lucide-react';
+import { Save, Download, Trash2, Cloud, AlertCircle } from 'lucide-react';
 import { useGameStore } from '../store/gameStore';
 import { SaveService, CloudSave } from '../services/saveService';
 import { EPISODES } from '../data/episodeLoader';
@@ -120,15 +120,16 @@ export const CloudSaveManager: React.FC<CloudSaveManagerProps> = ({ mode, onClos
       const store = useGameStore.getState();
       if (save.gameData.currentSceneId) store.setCurrentScene(save.gameData.currentSceneId);
       if (save.gameData.relationships) {
-        Object.keys(save.gameData.relationships).forEach(char => {
-          store.updateRelationship(char, save.gameData.relationships![char] - 50);
-        });
+        // Remplacer complètement les relations
+        useGameStore.setState({ relationships: save.gameData.relationships });
       }
       if (save.gameData.flags) {
         Object.keys(save.gameData.flags).forEach(key => {
           store.setFlag(key, save.gameData.flags![key]);
         });
       }
+      if (save.gameData.coins !== undefined) useGameStore.setState({ coins: save.gameData.coins });
+      if (save.gameData.energy !== undefined) useGameStore.setState({ energy: save.gameData.energy });
       if (save.gameData.playerName) store.setPlayerName(save.gameData.playerName);
       if (save.gameData.customCharacter) store.setCustomCharacter(save.gameData.customCharacter);
       

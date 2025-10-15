@@ -1,11 +1,14 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { GAME_CONFIG, LOCAL_STORAGE_KEY, GameState, NotificationType } from '../config/game';
+import { GAME_CONFIG, LOCAL_STORAGE_KEY, NotificationType } from '../config/game';
 import { AudioManager } from '../utils/audio';
 import { CustomCharacter } from '../types/characterCreator';
 import { PhoneConversation, PhoneMessage } from '../types/phone';
 import charactersData from '../data/characters.json';
 import storyData from '../data/story.json';
+
+// Ré-export GameState depuis config/game pour les services
+export type { GameState } from '../config/game';
 
 // Type pour l'utilisateur
 export interface User {
