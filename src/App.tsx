@@ -39,15 +39,15 @@ const App: React.FC = () => {
           displayName: user.displayName || 'Joueur',
           photoURL: user.photoURL || undefined
         });
-        // Si on est sur l'écran d'auth et qu'un utilisateur se connecte, aller au menu
-        if (gameState === 'Auth') {
+        // Si on est sur Landing ou Auth et qu'un utilisateur se connecte, aller au menu
+        if (gameState === 'Auth' || gameState === 'Landing') {
           setGameState('MainMenu');
         }
       } else {
         setUser(null);
-        // Si l'utilisateur se déconnecte, retourner à l'écran d'auth
-        if (gameState !== 'Auth') {
-          setGameState('Auth');
+        // Si l'utilisateur se déconnecte, retourner à la landing page
+        if (gameState === 'MainMenu') {
+          setGameState('Landing');
         }
       }
     });
