@@ -1,213 +1,212 @@
 import React, { useState } from 'react';
-import { ChevronLeft } from 'lucide-react';
+import { X, Volume2, VolumeX, Sun, Moon, Trash2, AlertTriangle } from 'lucide-react';
 import { useGameStore } from '../store/gameStore';
 
 export const SettingsScreen: React.FC = () => {
-  const { settings, updateSettings, goBack, resetGameProgress } = useGameStore((s) => ({
-    settings: s.settings,
-    updateSettings: s.updateSettings,
-    goBack: s.goBack,
-    resetGameProgress: s.resetGameProgress,
-  }));
-
+  const settings = useGameStore((s) => s.settings);
+  const updateSettings = useGameStore((s) => s.updateSettings);
+  const goBack = useGameStore((s) => s.goBack);
+  const resetGameProgress = useGameStore((s) => s.resetGameProgress);
+  
   const [confirmingReset, setConfirmingReset] = useState(false);
 
   const handleReset = () => {
     resetGameProgress();
     useGameStore.setState({ gameState: 'MainMenu', navigationStack: [] });
+    setConfirmingReset(false);
   };
 
   return (
     <div 
-      className="w-full h-full flex flex-col p-8 md:p-12 overflow-y-auto"
+      className="w-full h-full flex items-center justify-center relative overflow-hidden"
       style={{
-        background: 'linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%)',
+        backgroundImage: 'url("/assets/backgrounds/Pasillo 1.png")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       }}
     >
-      {/* En-tête avec bouton retour */}
-      <div className="flex items-center mb-12">
-        <button
-          onClick={goBack}
-          className="p-3 rounded-full transition-all hover:scale-110"
-          style={{
-            background: 'rgba(236, 72, 153, 0.1)',
-          }}
-        >
-          <ChevronLeft size={28} className="text-pink-500" />
-        </button>
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-800 ml-4">
-          Settings
-        </h1>
-      </div>
+      {/* Overlay sombre */}
+      <div className="absolute inset-0 bg-black/70" />
 
-      <div className="max-w-3xl mx-auto w-full space-y-10">
-        {/* Display Mode */}
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold text-gray-800">Display</h2>
-          <div className="flex gap-4">
-            <button
-              onClick={() => updateSettings({ theme: 'light' })}
-              className="flex-1 py-4 rounded-2xl font-bold text-lg transition-all"
-              style={{
-                background: settings.theme === 'light' 
-                  ? 'linear-gradient(135deg, #ec4899 0%, #f472b6 100%)' 
-                  : 'rgba(255, 255, 255, 0.5)',
-                color: settings.theme === 'light' ? 'white' : '#6b7280',
-                border: settings.theme === 'light' ? 'none' : '2px solid rgba(0,0,0,0.1)',
-                boxShadow: settings.theme === 'light' 
-                  ? '0 4px 20px rgba(236, 72, 153, 0.3)' 
-                  : 'none',
-              }}
-            >
-              Window
-            </button>
-            <button
-              onClick={() => updateSettings({ theme: 'dark' })}
-              className="flex-1 py-4 rounded-2xl font-bold text-lg transition-all"
-              style={{
-                background: settings.theme === 'dark' 
-                  ? 'linear-gradient(135deg, #ec4899 0%, #f472b6 100%)' 
-                  : 'rgba(255, 255, 255, 0.5)',
-                color: settings.theme === 'dark' ? 'white' : '#6b7280',
-                border: settings.theme === 'dark' ? 'none' : '2px solid rgba(0,0,0,0.1)',
-                boxShadow: settings.theme === 'dark' 
-                  ? '0 4px 20px rgba(236, 72, 153, 0.3)' 
-                  : 'none',
-              }}
-            >
-              Fullscreen
-            </button>
-          </div>
-        </div>
+      {/* Bouton fermer */}
+      <button
+        onClick={goBack}
+        className="absolute top-6 right-6 z-20 p-3 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-md text-white transition-all"
+      >
+        <X size={24} />
+      </button>
 
-        {/* Music Volume */}
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold text-gray-800">Music Volume</h2>
-          <div className="relative">
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={settings.musicVolume * 100}
-              onChange={(e) => updateSettings({ musicVolume: parseFloat(e.target.value) / 100 })}
-              className="w-full h-3 rounded-full appearance-none cursor-pointer"
-              style={{
-                background: `linear-gradient(to right, #ec4899 0%, #ec4899 ${settings.musicVolume * 100}%, #e5e7eb ${settings.musicVolume * 100}%, #e5e7eb 100%)`,
-              }}
-            />
-            <style>{`
-              input[type="range"]::-webkit-slider-thumb {
-                appearance: none;
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
-                background: #ec4899;
-                cursor: pointer;
-                box-shadow: 0 2px 10px rgba(236, 72, 153, 0.4);
-              }
-              input[type="range"]::-moz-range-thumb {
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
-                background: #ec4899;
-                cursor: pointer;
-                border: none;
-                box-shadow: 0 2px 10px rgba(236, 72, 153, 0.4);
-              }
-            `}</style>
-          </div>
-        </div>
-
-        {/* Sound Volume */}
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold text-gray-800">Sound Volume</h2>
-          <div className="relative">
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={settings.sfxVolume * 100}
-              onChange={(e) => updateSettings({ sfxVolume: parseFloat(e.target.value) / 100 })}
-              className="w-full h-3 rounded-full appearance-none cursor-pointer"
-              style={{
-                background: `linear-gradient(to right, #ec4899 0%, #ec4899 ${settings.sfxVolume * 100}%, #e5e7eb ${settings.sfxVolume * 100}%, #e5e7eb 100%)`,
-              }}
-            />
-          </div>
-          
-          {/* Mute All Button */}
-          <button
-            onClick={() => updateSettings({ musicVolume: 0, sfxVolume: 0 })}
-            className="px-8 py-3 rounded-2xl font-bold text-lg transition-all hover:scale-105"
-            style={{
-              background: 'rgba(255, 255, 255, 0.7)',
-              border: '2px solid rgba(236, 72, 153, 0.3)',
-              color: '#6b7280',
+      {/* Contenu principal */}
+      <div className="relative z-10 w-full max-w-4xl px-6 py-8 overflow-y-auto max-h-full">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 
+            className="text-6xl md:text-7xl font-bold text-white mb-4"
+            style={{ 
+              fontFamily: "'Quicksand', sans-serif",
+              textShadow: '0 4px 20px rgba(0,0,0,0.8)',
             }}
           >
-            Mute all
-          </button>
+            Paramètres
+          </h1>
+          <div className="h-1 w-48 mx-auto rounded-full bg-gradient-to-r from-transparent via-pink-500 to-transparent" 
+            style={{ boxShadow: '0 2px 10px rgba(236, 72, 153, 0.5)' }}
+          />
         </div>
 
-        {/* Text Speed */}
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold text-gray-800">Text Speed</h2>
-          <div className="relative">
-            <input
-              type="range"
-              min="10"
-              max="100"
-              value={settings.textSpeed}
-              onChange={(e) => updateSettings({ textSpeed: parseInt(e.target.value) })}
-              className="w-full h-3 rounded-full appearance-none cursor-pointer"
-              style={{
-                background: `linear-gradient(to right, #ec4899 0%, #ec4899 ${((settings.textSpeed - 10) / 90) * 100}%, #e5e7eb ${((settings.textSpeed - 10) / 90) * 100}%, #e5e7eb 100%)`,
-              }}
-            />
-          </div>
-        </div>
-
-        {/* Reset Progress */}
-        <div className="space-y-4 pt-6 border-t-2 border-pink-200">
-          <h2 className="text-2xl font-bold text-gray-800">Reset Progress</h2>
-          {!confirmingReset ? (
-            <button
-              onClick={() => setConfirmingReset(true)}
-              className="px-8 py-3 rounded-2xl font-bold text-lg transition-all hover:scale-105"
-              style={{
-                background: 'rgba(239, 68, 68, 0.1)',
-                border: '2px solid rgba(239, 68, 68, 0.3)',
-                color: '#dc2626',
-              }}
-            >
-              Reset All Data
-            </button>
-          ) : (
-            <div className="flex gap-4">
+        {/* Sections */}
+        <div className="space-y-8">
+          {/* Thème */}
+          <div className="p-8 bg-white/10 backdrop-blur-md rounded-2xl border-2 border-white/30">
+            <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+              {settings.theme === 'dark' ? <Moon size={28} /> : <Sun size={28} />}
+              Apparence
+            </h2>
+            
+            <div className="grid grid-cols-2 gap-4">
               <button
-                onClick={() => setConfirmingReset(false)}
-                className="flex-1 px-6 py-3 rounded-2xl font-bold text-lg transition-all hover:scale-105"
-                style={{
-                  background: 'rgba(156, 163, 175, 0.2)',
-                  border: '2px solid rgba(156, 163, 175, 0.3)',
-                  color: '#6b7280',
-                }}
+                onClick={() => updateSettings({ theme: 'light' })}
+                className={`p-6 rounded-xl font-bold text-lg transition-all ${
+                  settings.theme === 'light'
+                    ? 'bg-gradient-to-br from-pink-500 to-rose-500 text-white shadow-2xl scale-105'
+                    : 'bg-white/20 text-white/60 hover:bg-white/30'
+                }`}
               >
-                Cancel
+                <Sun size={32} className="mx-auto mb-2" />
+                Clair
               </button>
+
               <button
-                onClick={handleReset}
-                className="flex-1 px-6 py-3 rounded-2xl font-bold text-lg transition-all hover:scale-105"
-                style={{
-                  background: 'linear-gradient(135deg, #dc2626 0%, #ef4444 100%)',
-                  color: 'white',
-                  boxShadow: '0 4px 15px rgba(220, 38, 38, 0.3)',
-                }}
+                onClick={() => updateSettings({ theme: 'dark' })}
+                className={`p-6 rounded-xl font-bold text-lg transition-all ${
+                  settings.theme === 'dark'
+                    ? 'bg-gradient-to-br from-purple-600 to-pink-600 text-white shadow-2xl scale-105'
+                    : 'bg-white/20 text-white/60 hover:bg-white/30'
+                }`}
               >
-                Confirm Reset
+                <Moon size={32} className="mx-auto mb-2" />
+                Sombre
               </button>
             </div>
-          )}
+          </div>
+
+          {/* Volume Musique */}
+          <div className="p-8 bg-white/10 backdrop-blur-md rounded-2xl border-2 border-white/30">
+            <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+              {settings.musicVolume > 0 ? <Volume2 size={28} /> : <VolumeX size={28} />}
+              Volume Musique
+            </h2>
+            
+            <div className="flex items-center gap-4">
+              <VolumeX size={20} className="text-white/60" />
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={settings.musicVolume}
+                onChange={(e) => updateSettings({ musicVolume: Number(e.target.value) })}
+                className="flex-1 h-3 bg-white/20 rounded-full appearance-none cursor-pointer"
+                style={{
+                  background: `linear-gradient(to right, rgba(236, 72, 153, 0.8) 0%, rgba(236, 72, 153, 0.8) ${settings.musicVolume}%, rgba(255, 255, 255, 0.2) ${settings.musicVolume}%, rgba(255, 255, 255, 0.2) 100%)`
+                }}
+              />
+              <Volume2 size={20} className="text-white/60" />
+              <span className="text-white font-bold w-12 text-right">{settings.musicVolume}%</span>
+            </div>
+          </div>
+
+          {/* Volume Effets Sonores */}
+          <div className="p-8 bg-white/10 backdrop-blur-md rounded-2xl border-2 border-white/30">
+            <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+              {settings.sfxVolume > 0 ? <Volume2 size={28} /> : <VolumeX size={28} />}
+              Volume Effets Sonores
+            </h2>
+            
+            <div className="flex items-center gap-4">
+              <VolumeX size={20} className="text-white/60" />
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={settings.sfxVolume}
+                onChange={(e) => updateSettings({ sfxVolume: Number(e.target.value) })}
+                className="flex-1 h-3 bg-white/20 rounded-full appearance-none cursor-pointer"
+                style={{
+                  background: `linear-gradient(to right, rgba(168, 85, 247, 0.8) 0%, rgba(168, 85, 247, 0.8) ${settings.sfxVolume}%, rgba(255, 255, 255, 0.2) ${settings.sfxVolume}%, rgba(255, 255, 255, 0.2) 100%)`
+                }}
+              />
+              <Volume2 size={20} className="text-white/60" />
+              <span className="text-white font-bold w-12 text-right">{settings.sfxVolume}%</span>
+            </div>
+          </div>
+
+          {/* Vitesse du texte */}
+          <div className="p-8 bg-white/10 backdrop-blur-md rounded-2xl border-2 border-white/30">
+            <h2 className="text-2xl font-bold text-white mb-6">
+              Vitesse du Texte
+            </h2>
+            
+            <div className="grid grid-cols-3 gap-4">
+              {['slow', 'normal', 'fast'].map((speed) => (
+                <button
+                  key={speed}
+                  onClick={() => updateSettings({ textSpeed: speed as any })}
+                  className={`p-4 rounded-xl font-semibold text-lg transition-all ${
+                    settings.textSpeed === speed
+                      ? 'bg-gradient-to-br from-fuchsia-500 to-pink-500 text-white shadow-xl scale-105'
+                      : 'bg-white/20 text-white/60 hover:bg-white/30'
+                  }`}
+                >
+                  {speed === 'slow' && 'Lent'}
+                  {speed === 'normal' && 'Normal'}
+                  {speed === 'fast' && 'Rapide'}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Zone dangereuse */}
+          <div className="p-8 bg-red-900/30 backdrop-blur-md rounded-2xl border-2 border-red-500/50">
+            <h2 className="text-2xl font-bold text-red-300 mb-4 flex items-center gap-3">
+              <AlertTriangle size={28} />
+              Zone Dangereuse
+            </h2>
+            
+            <p className="text-white/80 mb-6">
+              Cette action supprimera toute votre progression, vos sauvegardes et vos personnalisations.
+              Cette action est irréversible !
+            </p>
+
+            {!confirmingReset ? (
+              <button
+                onClick={() => setConfirmingReset(true)}
+                className="w-full p-4 rounded-xl font-bold text-lg bg-red-500/20 hover:bg-red-500/30 text-red-300 border-2 border-red-500/50 transition-all flex items-center justify-center gap-2"
+              >
+                <Trash2 size={20} />
+                Réinitialiser le Jeu
+              </button>
+            ) : (
+              <div className="space-y-3">
+                <p className="text-red-200 font-bold text-center">
+                  Êtes-vous sûr(e) ?
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    onClick={() => setConfirmingReset(false)}
+                    className="p-3 rounded-xl font-semibold bg-white/20 hover:bg-white/30 text-white transition-all"
+                  >
+                    Annuler
+                  </button>
+                  <button
+                    onClick={handleReset}
+                    className="p-3 rounded-xl font-semibold bg-red-600 hover:bg-red-700 text-white transition-all"
+                  >
+                    Confirmer
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

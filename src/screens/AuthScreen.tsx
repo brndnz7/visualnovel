@@ -73,11 +73,15 @@ export const AuthScreen: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-full flex items-center justify-center p-4"
+    <div className="w-full h-full flex items-center justify-center p-4 relative overflow-hidden"
       style={{
-        background: 'linear-gradient(135deg, #3b0764 0%, #701a75 30%, #be185d 60%, #db2777 100%)',
+        backgroundImage: 'url("/assets/backgrounds/Cafeteria 3.png")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       }}
     >
+      {/* Overlay sombre */}
+      <div className="absolute inset-0 bg-black/70" />
       {/* Grille de fond */}
       <div className="absolute inset-0" style={{
         backgroundImage: `
