@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Play, Save, Settings, Home } from 'lucide-react';
+import { Play, Save, Settings, Home, X } from 'lucide-react';
 import { useGameStore } from '../store/gameStore';
 import { CloudSaveManager } from './CloudSaveManager';
 
@@ -34,149 +34,180 @@ export const PauseMenu: React.FC<PauseMenuProps> = ({ onClose }) => {
     onClose();
   };
 
-  const PauseButton = ({ 
-    onClick, 
-    icon: Icon, 
-    children, 
-    variant = 'primary' 
-  }: { 
-    onClick: () => void; 
-    icon: any; 
-    children: string; 
-    variant?: 'primary' | 'secondary' | 'danger';
-  }) => {
-    const [isHovered, setIsHovered] = useState(false);
-    
-    const getStyle = () => {
-      if (variant === 'danger') {
-        return {
-          background: isHovered 
-            ? 'linear-gradient(135deg, #dc2626 0%, #ef4444 100%)' 
-            : 'linear-gradient(135deg, #ef4444 0%, #f87171 100%)',
-          boxShadow: isHovered 
-            ? '0 8px 30px rgba(220, 38, 38, 0.4)' 
-            : '0 4px 15px rgba(239, 68, 68, 0.2)',
-        };
-      } else if (variant === 'secondary') {
-        return {
-          background: isHovered 
-            ? 'rgba(236, 72, 153, 0.15)' 
-            : 'rgba(236, 72, 153, 0.08)',
-          border: '2px solid rgba(236, 72, 153, 0.3)',
-          boxShadow: isHovered 
-            ? '0 4px 20px rgba(236, 72, 153, 0.2)' 
-            : 'none',
-          color: '#ec4899',
-        };
-      } else {
-        return {
-          background: isHovered 
-            ? 'linear-gradient(135deg, #f472b6 0%, #ec4899 100%)' 
-            : 'linear-gradient(135deg, #ec4899 0%, #db2777 100%)',
-          boxShadow: isHovered 
-            ? '0 8px 30px rgba(236, 72, 153, 0.4)' 
-            : '0 4px 15px rgba(236, 72, 153, 0.2)',
-        };
-      }
-    };
-    
-    return (
-      <button
-        onClick={onClick}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        className={`w-full py-4 rounded-2xl font-bold text-lg transition-all ${variant === 'secondary' ? '' : 'text-white'}`}
-        style={{
-          ...getStyle(),
-          transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
-        }}
+  return (
+    <>
+      {/* Overlay */}
+      <div 
+        className="fixed inset-0 z-40 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn"
+        onClick={onClose}
       >
-        <div className="flex items-center justify-center gap-3">
-          <Icon size={22} />
-          <span>{children}</span>
-        </div>
-      </button>
-    );
-  };
-
-  if (showConfirm) {
-    return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fadeIn">
+        {/* Menu principal */}
         <div 
-          className="bg-white rounded-3xl p-8 max-w-md w-full mx-4 animate-slideUp"
+          className="relative w-full max-w-md p-8 rounded-3xl backdrop-blur-xl border-2 animate-slideUp"
           style={{
-            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
+            background: 'rgba(0, 0, 0, 0.8)',
+            borderColor: 'rgba(236, 72, 153, 0.5)',
+            boxShadow: '0 10px 40px rgba(236, 72, 153, 0.4)',
           }}
+          onClick={(e) => e.stopPropagation()}
         >
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">
-            Retour au menu ?
+          {/* Bouton fermer */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-all"
+          >
+            <X size={20} className="text-white" />
+          </button>
+
+          {/* Titre */}
+          <h2 
+            className="text-4xl font-bold text-white text-center mb-2"
+            style={{ 
+              fontFamily: "'Quicksand', sans-serif",
+              textShadow: '0 2px 15px rgba(255, 255, 255, 0.3)',
+            }}
+          >
+            Menu Pause
           </h2>
-          <p className="text-lg text-gray-600 mb-8">
-            Votre progression non sauvegardée sera perdue.
-          </p>
-          <div className="flex flex-col gap-3">
+          <div className="h-1 w-32 mx-auto rounded-full bg-gradient-to-r from-transparent via-pink-500 to-transparent mb-8" 
+            style={{ boxShadow: '0 2px 10px rgba(236, 72, 153, 0.5)' }}
+          />
+
+          {/* Boutons */}
+          <div className="space-y-4">
             <button
-              onClick={() => setShowConfirm(false)}
-              className="w-full py-4 rounded-2xl font-bold text-lg transition-all hover:scale-105"
+              onClick={onClose}
+              className="w-full py-4 rounded-xl font-bold text-lg text-white transition-all hover:scale-105"
               style={{
-                background: 'linear-gradient(135deg, #ec4899 0%, #f472b6 100%)',
-                color: 'white',
+                background: 'linear-gradient(135deg, #ec4899 0%, #db2777 100%)',
                 boxShadow: '0 4px 15px rgba(236, 72, 153, 0.3)',
               }}
             >
-              Annuler
+              <div className="flex items-center justify-center gap-3">
+                <Play size={22} />
+                <span>Reprendre</span>
+              </div>
             </button>
+
             <button
-              onClick={confirmReturn}
-              className="w-full py-4 rounded-2xl font-bold text-lg transition-all hover:scale-105"
+              onClick={handleSave}
+              className="w-full py-4 rounded-xl font-bold text-lg text-white transition-all hover:scale-105"
               style={{
-                background: 'rgba(156, 163, 175, 0.2)',
-                color: '#6b7280',
-                border: '2px solid rgba(156, 163, 175, 0.3)',
+                background: 'rgba(255, 255, 255, 0.1)',
+                border: '2px solid rgba(255, 255, 255, 0.3)',
               }}
             >
-              Quitter
+              <div className="flex items-center justify-center gap-3">
+                <Save size={22} />
+                <span>Sauvegarder</span>
+              </div>
+            </button>
+
+            <button
+              onClick={handleSettings}
+              className="w-full py-4 rounded-xl font-bold text-lg text-white transition-all hover:scale-105"
+              style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                border: '2px solid rgba(255, 255, 255, 0.3)',
+              }}
+            >
+              <div className="flex items-center justify-center gap-3">
+                <Settings size={22} />
+                <span>Paramètres</span>
+              </div>
+            </button>
+
+            <button
+              onClick={handleReturnToMenu}
+              className="w-full py-4 rounded-xl font-bold text-lg text-white transition-all hover:scale-105"
+              style={{
+                background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+                boxShadow: '0 4px 15px rgba(239, 68, 68, 0.3)',
+              }}
+            >
+              <div className="flex items-center justify-center gap-3">
+                <Home size={22} />
+                <span>Retour au menu</span>
+              </div>
             </button>
           </div>
         </div>
+
+        {/* Confirmation retour menu */}
+        {showConfirm && (
+          <div 
+            className="absolute inset-0 z-50 flex items-center justify-center bg-black/80"
+            onClick={() => setShowConfirm(false)}
+          >
+            <div 
+              className="p-8 rounded-2xl backdrop-blur-xl border-2 max-w-md"
+              style={{
+                background: 'rgba(0, 0, 0, 0.9)',
+                borderColor: 'rgba(239, 68, 68, 0.5)',
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h3 className="text-2xl font-bold text-white text-center mb-4">
+                Retour au menu principal ?
+              </h3>
+              <p className="text-white/80 text-center mb-6">
+                Votre progression non sauvegardée sera perdue.
+              </p>
+              <div className="flex gap-4">
+                <button
+                  onClick={() => setShowConfirm(false)}
+                  className="flex-1 py-3 rounded-xl font-semibold text-white bg-white/10 hover:bg-white/20 transition-all"
+                >
+                  Annuler
+                </button>
+                <button
+                  onClick={confirmReturn}
+                  className="flex-1 py-3 rounded-xl font-semibold text-white bg-red-600 hover:bg-red-700 transition-all"
+                >
+                  Confirmer
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Manager de sauvegarde cloud */}
+        {showSaveManager && user && (
+          <div className="absolute inset-0 z-50">
+            <CloudSaveManager mode="save" onClose={() => setShowSaveManager(false)} />
+          </div>
+        )}
       </div>
-    );
-  }
 
-  if (showSaveManager) {
-    return <CloudSaveManager mode="save" onClose={() => { setShowSaveManager(false); onClose(); }} />;
-  }
+      <style>{`
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fadeIn">
-      <div 
-        className="bg-white rounded-3xl p-8 max-w-md w-full mx-4 animate-slideUp"
-        style={{
-          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
-        }}
-      >
-        <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">
-          Pause
-        </h1>
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
 
-        <div className="space-y-4">
-          <PauseButton onClick={onClose} icon={Play}>
-            Continuer
-          </PauseButton>
+        .animate-slideUp {
+          animation: slideUp 0.4s ease-out;
+        }
 
-          <PauseButton onClick={handleSave} icon={Save} variant="secondary">
-            Sauvegarder
-          </PauseButton>
-
-          <PauseButton onClick={handleSettings} icon={Settings} variant="secondary">
-            Paramètres
-          </PauseButton>
-
-          <PauseButton onClick={handleReturnToMenu} icon={Home} variant="danger">
-            Menu Principal
-          </PauseButton>
-        </div>
-      </div>
-    </div>
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease-out;
+        }
+      `}</style>
+    </>
   );
 };

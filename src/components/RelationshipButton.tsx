@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Heart, X } from 'lucide-react';
 import { useGameStore } from '../store/gameStore';
-import { charactersData } from '../data/characters';
+import charactersData from '../data/characters.json';
 
 export const RelationshipButton: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +20,7 @@ export const RelationshipButton: React.FC = () => {
       {/* Bouton rond */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="absolute bottom-6 right-6 p-4 rounded-full backdrop-blur-md border-2 transition-all hover:scale-110 z-50 animate-fadeIn"
+        className="absolute top-6 right-6 p-4 rounded-full backdrop-blur-md border-2 transition-all hover:scale-110 z-50 animate-fadeIn"
         style={{
           background: 'rgba(0, 0, 0, 0.6)',
           borderColor: 'rgba(236, 72, 153, 0.5)',
