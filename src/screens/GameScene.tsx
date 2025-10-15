@@ -77,7 +77,10 @@ export const GameScene: React.FC = () => {
     // Effet de fondu entrant si la scène le demande
     if (scene?.fadeIn) {
       setFadeOpacity(0);
-      setTimeout(() => setFadeOpacity(1), 100);
+      setTimeout(() => setFadeOpacity(1), 50);
+    } else {
+      // Réinitialiser l'opacité pour les scènes normales
+      setFadeOpacity(1);
     }
   }, [currentSceneId, scene]);
 
@@ -152,13 +155,24 @@ export const GameScene: React.FC = () => {
         
         // Fondu sortant si la scène le demande
         if (scene?.fadeOut) {
-          setTimeout(() => setFadeOpacity(0), delay - 1000);
+          const fadeOutTimer = setTimeout(() => {
+            setFadeOpacity(0);
+          }, delay - 1500); // Commence le fondu 1.5s avant la transition
+          
+          const transitionTimer = setTimeout(() => {
+            makeChoice(autoChoice);
+          }, delay);
+          
+          return () => {
+            clearTimeout(fadeOutTimer);
+            clearTimeout(transitionTimer);
+          };
+        } else {
+          const timer = setTimeout(() => {
+            makeChoice(autoChoice);
+          }, delay);
+          return () => clearTimeout(timer);
         }
-        
-        const timer = setTimeout(() => {
-          makeChoice(autoChoice);
-        }, delay);
-        return () => clearTimeout(timer);
       }
     }
   }, [showChoices, availableChoices, makeChoice, scene]);
@@ -212,15 +226,16 @@ export const GameScene: React.FC = () => {
   }, [showChoices, availableChoices, handleNext, makeChoice, showHistory, showPause]);
 
   return (
-    <div className="w-full h-full relative overflow-hidden">
-      {/* Fond noir pour les fondus */}
+    <div className="w-full h-full relative overflow-hidden bg-black">
+      {/* Couche de fondu noir */}
       <div 
-        className="absolute inset-0 bg-black pointer-events-none z-50 transition-opacity duration-1000"
+        className="absolute inset-0 bg-black z-50 pointer-events-none transition-opacity duration-[1500ms] ease-in-out"
         style={{ opacity: fadeOpacity === 0 ? 1 : 0 }}
       />
       
+      {/* Contenu de la scène */}
       <div 
-        className="w-full h-full relative overflow-hidden transition-opacity duration-1000"
+        className="w-full h-full relative overflow-hidden transition-opacity duration-[1500ms] ease-in-out"
         style={{ opacity: fadeOpacity }}
       >
         <SceneBackground backgroundId={scene.background} />
