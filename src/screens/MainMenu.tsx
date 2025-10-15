@@ -111,35 +111,70 @@ export const MainMenu: React.FC = () => {
       </div>
       
       {/* Contenu principal */}
-      <div className="z-10 flex gap-8 items-center justify-center w-full max-w-7xl">
-        {/* Section gauche - Logo et info */}
-        <div className="flex-1 text-center lg:text-left">
+      <div className="z-10 w-full max-w-7xl">
+        {/* Hero Section - Centré */}
+        <div className="text-center mb-12">
           <div className={`${!mounted ? 'opacity-0 translate-y-10' : 'opacity-100 translate-y-0'} transition-all duration-1000`}>
             <h1
-              className="text-6xl lg:text-8xl font-bold text-white drop-shadow-2xl mb-6"
+              className="text-7xl lg:text-9xl font-bold text-white drop-shadow-2xl mb-6"
               style={{ 
                 fontFamily: "'Quicksand', sans-serif",
-                textShadow: '0 2px 10px rgba(255, 255, 255, 0.25)',
+                textShadow: '0 2px 20px rgba(255, 255, 255, 0.4)',
               }}
             >
               Dissonance
             </h1>
             <div 
-              className="h-1.5 w-80 mx-auto lg:mx-0 rounded-full mb-6"
+              className="h-1.5 w-96 mx-auto rounded-full mb-8"
               style={{
-                background: 'linear-gradient(90deg, transparent, rgba(236,72,153,0.5), rgba(219,39,119,0.7), rgba(236,72,153,0.5), transparent)',
-                boxShadow: '0 2px 10px rgba(236, 72, 153, 0.3)',
+                background: 'linear-gradient(90deg, transparent, rgba(236,72,153,0.7), rgba(219,39,119,0.9), rgba(236,72,153,0.7), transparent)',
+                boxShadow: '0 2px 15px rgba(236, 72, 153, 0.5)',
               }}
             />
-            <p className="text-2xl lg:text-3xl text-white mb-4 font-semibold tracking-wide">
+            <p className="text-3xl lg:text-4xl text-white mb-4 font-bold tracking-wide">
               Une histoire dont vous êtes le héros
             </p>
-            <p className="text-lg text-white/80 mb-8">
-              Vivez une aventure romantique inoubliable
+            <p className="text-xl text-white/90 mb-12 max-w-3xl mx-auto">
+              Créez votre personnage, développez des relations uniques et faites des choix qui changeront votre destinée
             </p>
+          </div>
+        </div>
 
-            {/* Boutons secondaires simplifiés */}
-            <div className="flex gap-3 justify-center lg:justify-start flex-wrap mt-8">
+        {/* Grille de fonctionnalités */}
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border-2 border-white/20 hover:bg-white/15 transition-all">
+            <div className="flex items-center gap-3 mb-3">
+              <Heart size={28} className="text-pink-300" />
+              <h3 className="text-xl font-bold text-white">Relations</h3>
+            </div>
+            <p className="text-white/80">
+              Développez des liens avec Mia, Alex et Julien. Chaque choix influence vos relations !
+            </p>
+          </div>
+
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border-2 border-white/20 hover:bg-white/15 transition-all">
+            <div className="flex items-center gap-3 mb-3">
+              <Sparkles size={28} className="text-purple-300" />
+              <h3 className="text-xl font-bold text-white">Personnalisation</h3>
+            </div>
+            <p className="text-white/80">
+              Créez votre personnage unique avec des centaines d'options de customisation
+            </p>
+          </div>
+
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border-2 border-white/20 hover:bg-white/15 transition-all">
+            <div className="flex items-center gap-3 mb-3">
+              <Save size={28} className="text-blue-300" />
+              <h3 className="text-xl font-bold text-white">Sauvegardes Cloud</h3>
+            </div>
+            <p className="text-white/80">
+              Synchronisez vos progrès et jouez sur plusieurs appareils
+            </p>
+          </div>
+        </div>
+
+        {/* Boutons d'action principaux */}
+        <div className="flex flex-col lg:flex-row gap-4 justify-center items-center mb-12">
               <button 
                 className="px-6 py-3 rounded-xl transition-all hover:scale-105 flex items-center gap-2 font-bold text-white border-2 border-white/30"
                 onClick={() => setGameState('Shop')}
@@ -270,58 +305,6 @@ export const MainMenu: React.FC = () => {
         </div>
       </div>
 
-      {/* Modal À propos */}
-      {showAbout && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <div className="bg-gradient-to-br from-purple-900 to-pink-900 rounded-2xl p-8 max-w-2xl w-full border-2 border-white/20 shadow-2xl max-h-[90vh] overflow-y-auto">
-            <h2 className="text-3xl font-bold text-white mb-4">À propos de Dissonance</h2>
-            
-            <div className="space-y-4 text-white/90">
-              <p>
-                <strong className="text-pink-300">Dissonance</strong> est un visual novel romantique où vos choix façonnent votre histoire.
-              </p>
-              
-              <div className="bg-white/10 p-4 rounded-xl">
-                <h3 className="font-bold text-pink-300 mb-2 flex items-center gap-2">
-                  <Heart size={20} /> Personnages
-                </h3>
-                <p>Développez des relations avec trois personnages uniques : Mia, Alex et Julien. Chaque interaction compte !</p>
-              </div>
-
-              <div className="bg-white/10 p-4 rounded-xl">
-                <h3 className="font-bold text-pink-300 mb-2 flex items-center gap-2">
-                  <Sparkles size={20} /> Caractéristiques
-                </h3>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>Personnalisation complète de votre personnage</li>
-                  <li>Système de relations dynamique</li>
-                  <li>Sauvegardes cloud synchronisées</li>
-                  <li>Multiples fins selon vos choix</li>
-                  <li>Système de téléphone intégré</li>
-                </ul>
-              </div>
-
-              <div className="bg-white/10 p-4 rounded-xl">
-                <h3 className="font-bold text-pink-300 mb-2 flex items-center gap-2">
-                  <Users size={20} /> Communauté
-                </h3>
-                <p>Rejoignez notre communauté sur les réseaux sociaux pour ne rien manquer des nouveautés !</p>
-              </div>
-            </div>
-
-            <button
-              onClick={() => setShowAbout(false)}
-              className="mt-6 w-full py-3 rounded-xl font-bold text-white transition-all hover:scale-105"
-              style={{
-                background: 'linear-gradient(135deg, #ec4899 0%, #db2777 100%)',
-                boxShadow: '0 4px 15px rgba(236, 72, 153, 0.3)',
-              }}
-            >
-              Fermer
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* Modal Sauvegardes Cloud */}
       {showCloudSaves && user && (
