@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Play, CheckCircle, Lock } from 'lucide-react';
+import { X, Play, CheckCircle } from 'lucide-react';
 import { useGameStore } from '../store/gameStore';
 import { EPISODES } from '../data/episodeLoader';
 import { SaveManager } from '../utils/saveManager';

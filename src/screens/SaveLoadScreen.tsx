@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { X, Save, Trash2, Clock } from 'lucide-react';
 import { useGameStore } from '../store/gameStore';
 import { SaveManager, SaveSlot } from '../utils/saveManager';
-import { GAME_CONFIG } from '../config/game';
 
 interface SaveLoadScreenProps {
   mode: 'save' | 'load';

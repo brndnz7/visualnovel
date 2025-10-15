@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { CheckCircle, AlertCircle, Info, XCircle, Heart, TrendingUp, TrendingDown } from 'lucide-react';
+import { CheckCircle, AlertCircle, Info, XCircle, Heart, TrendingDown } from 'lucide-react';
 import { useGameStore } from '../store/gameStore';
 
 export const Notification: React.FC = () => {

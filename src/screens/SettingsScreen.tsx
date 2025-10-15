@@ -147,19 +147,21 @@ export const SettingsScreen: React.FC = () => {
             </h2>
             
             <div className="grid grid-cols-3 gap-4">
-              {['slow', 'normal', 'fast'].map((speed) => (
+              {[
+                { label: 'Lent', value: 60 },
+                { label: 'Normal', value: 30 },
+                { label: 'Rapide', value: 15 }
+              ].map((speedOption) => (
                 <button
-                  key={speed}
-                  onClick={() => updateSettings({ textSpeed: speed as any })}
+                  key={speedOption.label}
+                  onClick={() => updateSettings({ textSpeed: speedOption.value })}
                   className={`p-4 rounded-xl font-semibold text-lg transition-all ${
-                    settings.textSpeed === speed
+                    settings.textSpeed === speedOption.value
                       ? 'bg-gradient-to-br from-fuchsia-500 to-pink-500 text-white shadow-xl scale-105'
                       : 'bg-white/20 text-white/60 hover:bg-white/30'
                   }`}
                 >
-                  {speed === 'slow' && 'Lent'}
-                  {speed === 'normal' && 'Normal'}
-                  {speed === 'fast' && 'Rapide'}
+                  {speedOption.label}
                 </button>
               ))}
             </div>

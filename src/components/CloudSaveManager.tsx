@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Save, Download, Trash2, Cloud, AlertCircle } from 'lucide-react';
+import { Save, Download, Trash2, Cloud, AlertCircle, X } from 'lucide-react';
 import { useGameStore } from '../store/gameStore';
 import { SaveService, CloudSave } from '../services/saveService';
 import { EPISODES } from '../data/episodeLoader';
@@ -61,15 +61,18 @@ export const CloudSaveManager: React.FC<CloudSaveManagerProps> = ({ mode, onClos
       return;
     }
 
-    const name = saveName.trim() || `Sauvegarde ${slotNumber + 1}`;
     setLoading(true);
     setError('');
 
     try {
       // Trouver l'épisode actuel
-      const currentEpisode = EPISODES.find(ep => 
-        currentSceneId.includes(ep.id.replace('episode', 'ep'))
-      );
+      let episodeTitle = '';
+      for (const ep of EPISODES) {
+        if (currentSceneId.startsWith(ep.id) || currentSceneId.includes(ep.id.replace('episode', 'ep'))) {
+          episodeTitle = ep.title;
+          break;
+        }
+      }
 
       const gameData = {
         currentSceneId,
@@ -80,23 +83,30 @@ export const CloudSaveManager: React.FC<CloudSaveManagerProps> = ({ mode, onClos
         playerName,
         customCharacter,
         dialogueHistory,
-        phoneConversations
+        phoneConversations,
       };
+
+      const name = saveName.trim() || `Sauvegarde ${slotNumber + 1}`;
 
       await SaveService.saveGame(
         user.uid,
         slotNumber,
         name,
         gameData,
-        currentEpisode?.title,
+        episodeTitle || undefined,
         currentSceneId
       );
 
       await loadCloudSaves();
-      setSaveName('');
       setSelectedSlot(null);
+      setSaveName('');
       
-      useGameStore.getState().showNotification('Partie sauvegardée !', 'success');
+      useGameStore.getState().showNotification('Sauvegarde réussie !', 'success');
+      
+      // Fermer après 1 seconde
+      setTimeout(() => {
+        onClose();
+      }, 1000);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -114,8 +124,7 @@ export const CloudSaveManager: React.FC<CloudSaveManagerProps> = ({ mode, onClos
       const save = await SaveService.loadGame(user.uid, slotNumber);
       
       if (!save) {
-        setError('Aucune sauvegarde trouvée');
-        return;
+        throw new Error('Sauvegarde introuvable');
       }
 
       // Charger les données dans le store
@@ -134,9 +143,14 @@ export const CloudSaveManager: React.FC<CloudSaveManagerProps> = ({ mode, onClos
       if (save.gameData.energy !== undefined) useGameStore.setState({ energy: save.gameData.energy });
       if (save.gameData.playerName) store.setPlayerName(save.gameData.playerName);
       if (save.gameData.customCharacter) store.setCustomCharacter(save.gameData.customCharacter);
+      if (save.gameData.dialogueHistory) useGameStore.setState({ dialogueHistory: save.gameData.dialogueHistory });
+      if (save.gameData.phoneConversations) useGameStore.setState({ phoneConversations: save.gameData.phoneConversations });
+
+      useGameStore.getState().showNotification('Sauvegarde chargée !', 'success');
       
-      useGameStore.getState().showNotification('Partie chargée !', 'success');
+      // Retourner au jeu
       setGameState('Playing');
+      onClose();
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -146,7 +160,6 @@ export const CloudSaveManager: React.FC<CloudSaveManagerProps> = ({ mode, onClos
 
   const handleDelete = async (slotNumber: number) => {
     if (!user) return;
-    if (!window.confirm('Êtes-vous sûr de vouloir supprimer cette sauvegarde ?')) return;
 
     setLoading(true);
     setError('');
@@ -169,18 +182,24 @@ export const CloudSaveManager: React.FC<CloudSaveManagerProps> = ({ mode, onClos
 
   if (!user) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-        <div className="bg-white rounded-3xl p-8 max-w-md w-full mx-4">
-          <div className="flex items-center gap-3 text-amber-600 mb-4">
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+        <div 
+          className="rounded-3xl p-8 max-w-md w-full mx-4 backdrop-blur-xl border-2"
+          style={{
+            background: 'rgba(0, 0, 0, 0.8)',
+            borderColor: 'rgba(236, 72, 153, 0.5)',
+          }}
+        >
+          <div className="flex items-center gap-3 text-yellow-400 mb-4">
             <AlertCircle size={32} />
-            <h2 className="text-2xl font-bold">Connexion requise</h2>
+            <h2 className="text-2xl font-bold text-white">Connexion requise</h2>
           </div>
-          <p className="text-gray-700 mb-6">
+          <p className="text-white/80 mb-6">
             Vous devez être connecté pour utiliser les sauvegardes en ligne.
           </p>
           <button
             onClick={onClose}
-            className="w-full py-3 rounded-xl font-semibold text-white"
+            className="w-full py-3 rounded-xl font-semibold text-white transition-all hover:scale-105"
             style={{
               background: 'linear-gradient(135deg, #ec4899 0%, #db2777 100%)',
             }}
@@ -193,36 +212,46 @@ export const CloudSaveManager: React.FC<CloudSaveManagerProps> = ({ mode, onClos
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto">
-      <div className="bg-white rounded-3xl p-8 max-w-4xl w-full my-8">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
+      <div 
+        className="rounded-3xl p-8 max-w-4xl w-full my-8 backdrop-blur-xl border-2"
+        style={{
+          background: 'rgba(0, 0, 0, 0.85)',
+          borderColor: 'rgba(236, 72, 153, 0.5)',
+          boxShadow: '0 10px 40px rgba(236, 72, 153, 0.4)',
+        }}
+      >
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-4xl font-bold text-gray-800 flex items-center gap-3">
-              <Cloud size={40} className="text-indigo-500" />
+            <h1 
+              className="text-5xl font-bold text-white flex items-center gap-3"
+              style={{ fontFamily: "'Quicksand', sans-serif" }}
+            >
+              <Cloud size={48} className="text-pink-400" />
               {mode === 'save' ? 'Sauvegarder' : 'Charger'}
             </h1>
-            <p className="text-gray-600 mt-2">
-              Connecté en tant que <span className="font-semibold">{user.displayName}</span>
+            <p className="text-white/70 mt-2">
+              Connecté en tant que <span className="font-semibold text-white">{user.displayName}</span>
             </p>
           </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 text-2xl font-bold"
+            className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-all"
           >
-            ×
+            <X size={24} className="text-white" />
           </button>
         </div>
 
         {error && (
-          <div className="mb-4 p-4 rounded-xl bg-red-100 border border-red-300 text-red-700">
+          <div className="mb-4 p-4 rounded-xl bg-red-500/20 border border-red-500/50 text-red-200">
             {error}
           </div>
         )}
 
         {loading && (
           <div className="text-center py-8">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500"></div>
-            <p className="mt-4 text-gray-600">Chargement...</p>
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-pink-500"></div>
+            <p className="mt-4 text-white/70">Chargement...</p>
           </div>
         )}
 
@@ -235,30 +264,34 @@ export const CloudSaveManager: React.FC<CloudSaveManagerProps> = ({ mode, onClos
               return (
                 <div
                   key={index}
-                  className={`p-6 rounded-2xl border-2 transition-all ${
-                    selectedSlot === index
-                      ? 'border-indigo-500 bg-indigo-50'
-                      : 'border-gray-200 bg-gray-50 hover:border-indigo-300'
-                  }`}
+                  className="p-6 rounded-2xl border-2 transition-all backdrop-blur-md"
+                  style={{
+                    background: selectedSlot === index 
+                      ? 'rgba(236, 72, 153, 0.15)' 
+                      : 'rgba(255, 255, 255, 0.05)',
+                    borderColor: selectedSlot === index 
+                      ? 'rgba(236, 72, 153, 0.7)' 
+                      : 'rgba(255, 255, 255, 0.2)',
+                  }}
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <span className="text-2xl font-bold text-gray-800">Slot {index + 1}</span>
+                        <span className="text-2xl font-bold text-white">Slot {index + 1}</span>
                         {isEmpty ? (
-                          <span className="text-sm text-gray-400">Vide</span>
+                          <span className="text-sm text-white/50">Vide</span>
                         ) : (
-                          <span className="text-sm px-3 py-1 rounded-full bg-green-100 text-green-700">
+                          <span className="text-sm px-3 py-1 rounded-full bg-green-500/30 text-green-300 border border-green-500/50">
                             Utilisé
                           </span>
                         )}
                       </div>
 
                       {!isEmpty && save && (
-                        <div className="space-y-1 text-sm text-gray-600">
-                          <p className="font-semibold text-gray-800">{save.saveName}</p>
+                        <div className="space-y-1 text-sm text-white/80">
+                          <p className="font-semibold text-white text-lg">{save.saveName}</p>
                           {save.episodeTitle && (
-                            <p className="text-indigo-600">{save.episodeTitle}</p>
+                            <p className="text-pink-300">{save.episodeTitle}</p>
                           )}
                           <p>Sauvegardé le {new Date(save.timestamp).toLocaleString('fr-FR')}</p>
                         </div>
@@ -270,7 +303,10 @@ export const CloudSaveManager: React.FC<CloudSaveManagerProps> = ({ mode, onClos
                           value={saveName}
                           onChange={(e) => setSaveName(e.target.value)}
                           placeholder="Nom de la sauvegarde (optionnel)"
-                          className="mt-3 w-full px-4 py-2 rounded-xl border-2 border-indigo-200 focus:border-indigo-500 focus:outline-none"
+                          className="mt-3 w-full px-4 py-2 rounded-xl border-2 bg-white/10 text-white placeholder-white/50 focus:outline-none"
+                          style={{
+                            borderColor: 'rgba(236, 72, 153, 0.5)',
+                          }}
                         />
                       )}
                     </div>
@@ -283,7 +319,8 @@ export const CloudSaveManager: React.FC<CloudSaveManagerProps> = ({ mode, onClos
                             disabled={loading}
                             className="px-6 py-3 rounded-xl font-semibold text-white transition-all hover:scale-105"
                             style={{
-                              background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+                              background: 'linear-gradient(135deg, #ec4899 0%, #db2777 100%)',
+                              boxShadow: '0 4px 15px rgba(236, 72, 153, 0.3)',
                             }}
                           >
                             <Save size={20} className="inline mr-2" />
@@ -292,7 +329,11 @@ export const CloudSaveManager: React.FC<CloudSaveManagerProps> = ({ mode, onClos
                         ) : (
                           <button
                             onClick={() => setSelectedSlot(index)}
-                            className="px-6 py-3 rounded-xl font-semibold text-indigo-600 border-2 border-indigo-300 hover:bg-indigo-50 transition-all"
+                            className="px-6 py-3 rounded-xl font-semibold text-white border-2 transition-all hover:scale-105"
+                            style={{
+                              borderColor: 'rgba(236, 72, 153, 0.5)',
+                              background: 'rgba(236, 72, 153, 0.1)',
+                            }}
                           >
                             {isEmpty ? 'Sauvegarder ici' : 'Écraser'}
                           </button>
@@ -305,6 +346,7 @@ export const CloudSaveManager: React.FC<CloudSaveManagerProps> = ({ mode, onClos
                             className="px-6 py-3 rounded-xl font-semibold text-white transition-all hover:scale-105"
                             style={{
                               background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                              boxShadow: '0 4px 15px rgba(16, 185, 129, 0.3)',
                             }}
                           >
                             <Download size={20} className="inline mr-2" />
@@ -317,7 +359,7 @@ export const CloudSaveManager: React.FC<CloudSaveManagerProps> = ({ mode, onClos
                         <button
                           onClick={() => handleDelete(index)}
                           disabled={loading}
-                          className="px-4 py-3 rounded-xl text-red-600 border-2 border-red-300 hover:bg-red-50 transition-all"
+                          className="px-4 py-3 rounded-xl text-red-300 border-2 border-red-500/50 hover:bg-red-500/20 transition-all"
                         >
                           <Trash2 size={20} />
                         </button>
@@ -333,4 +375,3 @@ export const CloudSaveManager: React.FC<CloudSaveManagerProps> = ({ mode, onClos
     </div>
   );
 };
-

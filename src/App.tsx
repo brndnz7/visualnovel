@@ -16,6 +16,7 @@ import { Notification } from './components/Notification';
 import { Phone } from './components/Phone';
 import { OrientationWarning } from './components/OrientationWarning';
 import { AuthService } from './services/authService';
+import { CrazyGamesService } from './services/crazyGamesService';
 import './styles/global.css';
 
 const App: React.FC = () => {
@@ -65,6 +66,15 @@ const App: React.FC = () => {
     const interval = setInterval(rechargeEnergy, 60000); // Chaque minute
     return () => clearInterval(interval);
   }, [rechargeEnergy]);
+
+  // Initialiser CrazyGames SDK
+  useEffect(() => {
+    CrazyGamesService.initialize().then(() => {
+      console.log('🎮 CrazyGames SDK prêt');
+    }).catch((error) => {
+      console.error('❌ Erreur init CrazyGames:', error);
+    });
+  }, []);
 
   // Rendu de l'écran actuel
   const renderGameState = () => {
