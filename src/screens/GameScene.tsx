@@ -212,11 +212,18 @@ export const GameScene: React.FC = () => {
   }, [showChoices, availableChoices, handleNext, makeChoice, showHistory, showPause]);
 
   return (
-    <div 
-      className="w-full h-full relative overflow-hidden transition-opacity duration-1000"
-      style={{ opacity: fadeOpacity }}
-    >
-      <SceneBackground backgroundId={scene.background} />
+    <div className="w-full h-full relative overflow-hidden">
+      {/* Fond noir pour les fondus */}
+      <div 
+        className="absolute inset-0 bg-black pointer-events-none z-50 transition-opacity duration-1000"
+        style={{ opacity: fadeOpacity === 0 ? 1 : 0 }}
+      />
+      
+      <div 
+        className="w-full h-full relative overflow-hidden transition-opacity duration-1000"
+        style={{ opacity: fadeOpacity }}
+      >
+        <SceneBackground backgroundId={scene.background} />
 
       {/* Logique d'affichage des personnages */}
       {(() => {
@@ -328,6 +335,7 @@ export const GameScene: React.FC = () => {
 
       {/* Menu Pause */}
       {showPause && <PauseMenu onClose={() => setShowPause(false)} />}
+      </div>
     </div>
   );
 };
