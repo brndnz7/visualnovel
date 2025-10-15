@@ -33,118 +33,165 @@ export class AdSenseService {
     onComplete: () => void,
     onError?: (error: string) => void
   ): void {
-    // Mode développement : simuler une pub
-    if (!this.clientId || this.clientId === 'dev-mode') {
-      console.log('🔧 MODE DEV - Simulation de pub AdSense...');
-      this.simulateAd(onComplete);
-      return;
-    }
-
-    // Mode production : afficher une vraie pub
+    console.log('💰 Affichage publicité AdSense RÉELLE...');
+    
     try {
-      console.log('💰 Affichage publicité AdSense...');
+      // Créer l'overlay de pub
+      const adContainer = document.createElement('div');
+      adContainer.id = 'ad-reward-container';
+      adContainer.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.3s;
+      `;
       
-      // AdSense rewarded ads
-      if (window.adsbygoogle) {
-        // Créer une div pour la pub
-        const adContainer = document.createElement('div');
-        adContainer.className = 'adsbygoogle';
-        adContainer.style.cssText = 'display:block; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:9999; width:100%; height:100%; background:rgba(0,0,0,0.8);';
-        
-        // Conteneur de la pub
-        const adBox = document.createElement('div');
-        adBox.style.cssText = 'position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); width:90%; max-width:600px; background:white; border-radius:10px; padding:20px;';
-        
-        // Bouton fermer
-        const closeBtn = document.createElement('button');
-        closeBtn.textContent = '✕ Fermer';
-        closeBtn.style.cssText = 'position:absolute; top:10px; right:10px; background:#f00; color:white; border:none; padding:10px; border-radius:5px; cursor:pointer;';
-        closeBtn.onclick = () => {
-          document.body.removeChild(adContainer);
-          onError?.('Publicité fermée avant la fin');
-        };
-        
-        // Placeholder pub (sera remplacé par la vraie pub AdSense)
-        const adPlaceholder = document.createElement('div');
-        adPlaceholder.style.cssText = 'width:100%; height:250px; background:#eee; display:flex; align-items:center; justify-content:center; margin-bottom:20px;';
-        adPlaceholder.innerHTML = `
-          <div style="text-align:center;">
-            <div style="font-size:48px; margin-bottom:10px;">📺</div>
-            <p style="color:#666;">Publicité AdSense</p>
-            <p style="color:#999; font-size:12px;">Regardez jusqu'à la fin pour la récompense</p>
-          </div>
-        `;
-        
-        // Bouton "J'ai regardé"
-        const watchedBtn = document.createElement('button');
-        watchedBtn.textContent = '✓ J\'ai regardé la pub (Récompense)';
-        watchedBtn.style.cssText = 'width:100%; padding:15px; background:#4CAF50; color:white; border:none; border-radius:5px; font-size:16px; cursor:pointer; font-weight:bold;';
-        watchedBtn.onclick = () => {
-          document.body.removeChild(adContainer);
-          onComplete();
-        };
-        
-        adBox.appendChild(closeBtn);
-        adBox.appendChild(adPlaceholder);
-        adBox.appendChild(watchedBtn);
-        adContainer.appendChild(adBox);
-        document.body.appendChild(adContainer);
-        
-        // Timer automatique (10 secondes)
-        setTimeout(() => {
-          watchedBtn.style.background = '#45a049';
-          watchedBtn.style.animation = 'pulse 0.5s';
-        }, 5000);
-        
-      } else {
-        throw new Error('AdSense non chargé');
+      // Conteneur principal
+      const adBox = document.createElement('div');
+      adBox.style.cssText = `
+        position: relative;
+        width: 90%;
+        max-width: 728px;
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      `;
+      
+      // Header
+      const header = document.createElement('div');
+      header.style.cssText = 'text-align: center; margin-bottom: 20px;';
+      header.innerHTML = `
+        <h2 style="font-size: 24px; color: #333; margin: 0 0 10px 0;">📺 Publicité</h2>
+        <p style="color: #666; margin: 0; font-size: 14px;">Regardez cette publicité pour recevoir +5 énergie</p>
+      `;
+      
+      // Zone de pub AdSense
+      const adSlot = document.createElement('div');
+      adSlot.className = 'adsbygoogle';
+      adSlot.style.cssText = `
+        display: block;
+        width: 100%;
+        min-height: 280px;
+        margin: 20px 0;
+        background: #f5f5f5;
+        border-radius: 10px;
+      `;
+      adSlot.setAttribute('data-ad-client', this.clientId);
+      adSlot.setAttribute('data-ad-slot', '1234567890'); // À remplacer par ton vrai slot ID
+      adSlot.setAttribute('data-ad-format', 'auto');
+      adSlot.setAttribute('data-full-width-responsive', 'true');
+      
+      // Timer et progression
+      let countdown = 10;
+      const timerDiv = document.createElement('div');
+      timerDiv.style.cssText = `
+        text-align: center;
+        margin: 20px 0;
+        font-size: 16px;
+        color: #666;
+      `;
+      timerDiv.innerHTML = `Récompense disponible dans <strong id="countdown">${countdown}</strong> secondes...`;
+      
+      // Bouton de récompense (désactivé au début)
+      const rewardBtn = document.createElement('button');
+      rewardBtn.textContent = '✓ Réclamer la récompense (+5 ⚡)';
+      rewardBtn.disabled = true;
+      rewardBtn.style.cssText = `
+        width: 100%;
+        padding: 15px;
+        background: #ccc;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: not-allowed;
+        transition: all 0.3s;
+      `;
+      
+      // Bouton fermer
+      const closeBtn = document.createElement('button');
+      closeBtn.innerHTML = '✕';
+      closeBtn.style.cssText = `
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        background: rgba(0,0,0,0.1);
+        border: none;
+        border-radius: 50%;
+        font-size: 24px;
+        cursor: pointer;
+        color: #666;
+        transition: all 0.2s;
+      `;
+      closeBtn.onmouseover = () => closeBtn.style.background = 'rgba(0,0,0,0.2)';
+      closeBtn.onmouseout = () => closeBtn.style.background = 'rgba(0,0,0,0.1)';
+      closeBtn.onclick = () => {
+        document.body.removeChild(adContainer);
+        onError?.('Publicité fermée avant la fin');
+      };
+      
+      // Assemblage
+      adBox.appendChild(closeBtn);
+      adBox.appendChild(header);
+      adBox.appendChild(adSlot);
+      adBox.appendChild(timerDiv);
+      adBox.appendChild(rewardBtn);
+      adContainer.appendChild(adBox);
+      document.body.appendChild(adContainer);
+      
+      // Charger la pub AdSense
+      try {
+        if (window.adsbygoogle) {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+        }
+      } catch (e) {
+        console.log('AdSense push error:', e);
       }
+      
+      // Timer de countdown
+      const timer = setInterval(() => {
+        countdown--;
+        const countdownEl = document.getElementById('countdown');
+        if (countdownEl) {
+          countdownEl.textContent = countdown.toString();
+        }
+        
+        if (countdown <= 0) {
+          clearInterval(timer);
+          // Activer le bouton de récompense
+          rewardBtn.disabled = false;
+          rewardBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #34d399 100%)';
+          rewardBtn.style.cursor = 'pointer';
+          rewardBtn.style.boxShadow = '0 4px 15px rgba(16, 185, 129, 0.4)';
+          timerDiv.innerHTML = '<strong style="color: #10b981;">✓ Publicité terminée !</strong>';
+          
+          rewardBtn.onclick = () => {
+            document.body.removeChild(adContainer);
+            onComplete();
+          };
+          
+          // Animation pulse
+          rewardBtn.style.animation = 'pulse 1s infinite';
+        }
+      }, 1000);
+      
     } catch (error: any) {
-      console.error('❌ Erreur publicité AdSense:', error);
-      // Fallback : simuler
-      this.simulateAd(onComplete);
+      console.error('❌ Erreur publicité:', error);
+      onError?.(error.message || 'Erreur lors du chargement de la publicité');
     }
   }
 
-  /**
-   * Simuler une pub en mode dev
-   */
-  private static simulateAd(onComplete: () => void): void {
-    console.log('🎬 [SIMULATION] Publicité de 3 secondes...');
-    
-    // Créer overlay
-    const overlay = document.createElement('div');
-    overlay.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; display:flex; align-items:center; justify-content:center;';
-    
-    const content = document.createElement('div');
-    content.style.cssText = 'text-align:center; color:white;';
-    
-    let countdown = 3;
-    content.innerHTML = `
-      <div style="font-size:64px; margin-bottom:20px;">📺</div>
-      <h2 style="font-size:32px; margin-bottom:10px;">MODE DÉVELOPPEMENT</h2>
-      <p style="font-size:18px; margin-bottom:20px;">Publicité simulée</p>
-      <div id="countdown" style="font-size:48px; font-weight:bold;">${countdown}</div>
-      <p style="font-size:14px; color:#888; margin-top:20px;">En production, une vraie pub AdSense s'affichera ici</p>
-    `;
-    
-    overlay.appendChild(content);
-    document.body.appendChild(overlay);
-    
-    const timer = setInterval(() => {
-      countdown--;
-      const countdownEl = document.getElementById('countdown');
-      if (countdownEl) {
-        countdownEl.textContent = countdown.toString();
-      }
-      
-      if (countdown <= 0) {
-        clearInterval(timer);
-        document.body.removeChild(overlay);
-        onComplete();
-      }
-    }, 1000);
-  }
 
   /**
    * Vérifier si AdSense est prêt
