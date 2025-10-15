@@ -1,6 +1,5 @@
 import React, { useEffect, Suspense } from 'react';
 import { useGameStore } from './store/gameStore';
-import { LandingPage } from './screens/LandingPage';
 import { AuthScreen } from './screens/AuthScreen';
 import { MainMenu } from './screens/MainMenu';
 import { NamingScreen } from './screens/NamingScreen';
@@ -69,8 +68,6 @@ const App: React.FC = () => {
   // Rendu de l'écran actuel
   const renderGameState = () => {
     switch (gameState) {
-      case 'Landing':
-        return <LandingPage />;
       case 'Auth':
         return <AuthScreen />;
       case 'Naming':

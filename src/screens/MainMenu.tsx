@@ -81,17 +81,90 @@ export const MainMenu: React.FC = () => {
     );
   };
 
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <div 
-      className="w-full h-full flex items-center justify-center relative overflow-hidden"
-      style={{
-        backgroundImage: 'url(/ressources/VN backgrounds FHD/Pasillo 2.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
-    >
-      {/* Overlay sombre */}
-      <div className="absolute inset-0 bg-black/50" />
+    <div className="w-full h-full overflow-y-auto bg-black">
+      {/* Header Navigation Sticky */}
+      <header 
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled ? 'bg-black/90 backdrop-blur-lg shadow-lg' : 'bg-transparent'
+        }`}
+      >
+        <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <button 
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="text-3xl font-bold text-white"
+            style={{ fontFamily: "'Quicksand', sans-serif" }}
+          >
+            Dissonance
+          </button>
+
+          <div className="hidden md:flex items-center gap-8">
+            <button onClick={() => scrollToSection('histoire')} className="text-white/80 hover:text-white transition-colors">
+              L'Histoire
+            </button>
+            <button onClick={() => scrollToSection('personnages')} className="text-white/80 hover:text-white transition-colors">
+              Personnages
+            </button>
+            <button 
+              onClick={startGame}
+              className="px-6 py-2 rounded-lg bg-pink-600 hover:bg-pink-700 text-white font-semibold transition-colors"
+            >
+              Jouer Maintenant
+            </button>
+          </div>
+
+          <div className="flex items-center gap-4">
+            {user ? (
+              <div className="relative">
+                <button
+                  onClick={() => setShowUserMenu(!showUserMenu)}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md text-white font-semibold hover:bg-white/30 transition-all"
+                >
+                  <User size={20} />
+                  <span>{user.displayName || user.email?.split('@')[0] || 'Joueur'}</span>
+                  <ChevronDown size={16} className={`transition-transform ${showUserMenu ? 'rotate-180' : ''}`} />
+                </button>
+                {showUserMenu && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white/20 backdrop-blur-md rounded-lg shadow-lg overflow-hidden border border-white/30">
+                    <button
+                      onClick={async () => { await AuthService.signOut(); signOut(); setShowUserMenu(false); }}
+                      className="flex items-center gap-2 w-full px-4 py-2 text-left text-white hover:bg-white/30 transition-colors"
+                    >
+                      <LogOut size={18} /> Déconnexion
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <button
+                onClick={() => setGameState('Auth')}
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md text-white font-semibold hover:bg-white/30 transition-all"
+              >
+                <LogIn size={20} />
+                <span>Connexion</span>
+              </button>
+            )}
+            <Twitter size={20} className="text-white/60 hover:text-white cursor-pointer transition-colors" />
+            <Instagram size={20} className="text-white/60 hover:text-white cursor-pointer transition-colors" />
+          </div>
+        </nav>
+      </header>
+
+      {/* Section 1: Hero */}
+      <section 
+        className="relative min-h-screen flex items-center justify-center"
+        style={{
+          backgroundImage: 'url(/ressources/VN backgrounds FHD/Salon 1.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60" />
       
       {/* Effet de distorsion subtile */}
       <div className="absolute inset-0 opacity-30">
