@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { GAME_CONFIG, LOCAL_STORAGE_KEY, NotificationType } from '../config/game';
+import { GAME_CONFIG, LOCAL_STORAGE_KEY, NotificationType, GameState } from '../config/game';
 import { AudioManager } from '../utils/audio';
 import { CustomCharacter } from '../types/characterCreator';
 import { PhoneConversation, PhoneMessage } from '../types/phone';

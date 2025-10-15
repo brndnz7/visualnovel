@@ -9,17 +9,31 @@ import {
   query,
   where,
   orderBy,
-  Timestamp
+  Timestamp,
+  DocumentData
 } from 'firebase/firestore';
 import { db } from '../config/firebase';
-import { GameState } from '../store/gameStore';
+import { CustomCharacter } from '../types/characterCreator';
+import { PhoneConversation } from '../types/phone';
+
+export interface GameDataSave {
+  currentSceneId?: string;
+  relationships?: Record<string, number>;
+  flags?: Record<string, boolean | number | string>;
+  coins?: number;
+  energy?: number;
+  playerName?: string;
+  customCharacter?: CustomCharacter | null;
+  dialogueHistory?: any[];
+  phoneConversations?: PhoneConversation[];
+}
 
 export interface CloudSave {
   id: string;
   userId: string;
   slotNumber: number;
   saveName: string;
-  gameData: Partial<GameState>;
+  gameData: GameDataSave;
   timestamp: Date;
   episodeTitle?: string;
   sceneTitle?: string;
@@ -35,7 +49,7 @@ export class SaveService {
     userId: string,
     slotNumber: number,
     saveName: string,
-    gameData: Partial<GameState>,
+    gameData: GameDataSave,
     episodeTitle?: string,
     sceneTitle?: string
   ): Promise<void> {
@@ -108,7 +122,7 @@ export class SaveService {
       const querySnapshot = await getDocs(q);
       const saves: CloudSave[] = [];
 
-      querySnapshot.forEach((docSnap) => {
+      querySnapshot.forEach((docSnap: DocumentData) => {
         const data = docSnap.data();
         saves.push({
           id: docSnap.id,
