@@ -73,7 +73,7 @@ export const LandingPage: React.FC = () => {
       <section 
         className="relative min-h-screen flex items-center justify-center"
         style={{
-          backgroundImage: 'url(/assets/backgrounds/Salon 1.png)',
+          backgroundImage: 'url("/assets/backgrounds/Salon 1.png")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed',
@@ -128,7 +128,7 @@ export const LandingPage: React.FC = () => {
         id="fissure"
         className="relative min-h-screen flex items-center"
         style={{
-          backgroundImage: 'url(/assets/backgrounds/Pasillo 2.png)',
+          backgroundImage: 'url("/assets/backgrounds/Pasillo 2.png")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed',
@@ -213,7 +213,7 @@ export const LandingPage: React.FC = () => {
       <section 
         className="relative py-32"
         style={{
-          backgroundImage: 'url(/assets/backgrounds/Cafeteria 1.png)',
+          backgroundImage: 'url("/assets/backgrounds/Cafeteria 1.png")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed',
@@ -258,7 +258,7 @@ export const LandingPage: React.FC = () => {
       <section 
         className="relative min-h-screen flex items-center justify-center"
         style={{
-          backgroundImage: 'url(/assets/backgrounds/Salon 3.png)',
+          backgroundImage: 'url("/assets/backgrounds/Salon 3.png")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed',

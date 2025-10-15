@@ -28,7 +28,7 @@ export const MainMenu: React.FC = () => {
     <div 
       className="w-full h-full flex items-center justify-center relative overflow-hidden"
       style={{
-        backgroundImage: 'url(/assets/backgrounds/Pasillo 2.png)',
+        backgroundImage: 'url("/assets/backgrounds/Pasillo 2.png")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
