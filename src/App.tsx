@@ -16,7 +16,7 @@ import { Notification } from './components/Notification';
 import { Phone } from './components/Phone';
 import { OrientationWarning } from './components/OrientationWarning';
 import { AuthService } from './services/authService';
-import { AdSenseService } from './services/adSenseService';
+import { ImaAdsService } from './services/imaAdsService';
 import './styles/global.css';
 
 const App: React.FC = () => {
@@ -67,11 +67,18 @@ const App: React.FC = () => {
     return () => clearInterval(interval);
   }, [rechargeEnergy]);
 
-  // Initialiser Google AdSense
+  // Initialiser Google IMA SDK
   useEffect(() => {
-    const clientId = import.meta.env.VITE_ADSENSE_CLIENT_ID || 'dev-mode';
-    AdSenseService.initialize(clientId);
-    console.log('💰 Google AdSense prêt');
+    // Attendre que le SDK soit chargé
+    const checkIMAReady = setInterval(() => {
+      if (window.google?.ima) {
+        ImaAdsService.initialize();
+        console.log('🎬 Google IMA SDK prêt');
+        clearInterval(checkIMAReady);
+      }
+    }, 100);
+
+    return () => clearInterval(checkIMAReady);
   }, []);
 
   // Rendu de l'écran actuel

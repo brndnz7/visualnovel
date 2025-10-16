@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Play, Zap } from 'lucide-react';
-import { AdSenseService } from '../services/adSenseService';
+import { ImaAdsService } from '../services/imaAdsService';
 import { useGameStore } from '../store/gameStore';
 
 interface AdRewardButtonProps {
@@ -17,12 +17,12 @@ export const AdRewardButton: React.FC<AdRewardButtonProps> = ({
   const handleWatchAd = () => {
     setIsLoading(true);
 
-    AdSenseService.showRewardedAd(
-      // onComplete - Pub terminée avec succès
+    ImaAdsService.showRewardedVideoAd(
+      // onComplete - Pub vidéo terminée avec succès
       () => {
         setIsLoading(false);
         addEnergy(energyReward);
-        showNotification(`+${energyReward} Énergie ! Merci d'avoir regardé la pub 💰`, 'success');
+        showNotification(`+${energyReward} Énergie ! Merci d'avoir regardé la pub vidéo 🎬`, 'success');
       },
       // onError - Erreur
       (error) => {
@@ -51,7 +51,7 @@ export const AdRewardButton: React.FC<AdRewardButtonProps> = ({
       
       {/* Tooltip */}
       <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-black/90 text-white text-xs rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-        Regarder une pub (+{energyReward} <Zap size={12} className="inline" />)
+        Regarder une pub vidéo (+{energyReward} <Zap size={12} className="inline" />)
       </div>
     </button>
   );
